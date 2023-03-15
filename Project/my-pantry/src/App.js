@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
-import Home from './pages/home/Home';
+import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Mypantry from './pages/mypantry/mypantry';
@@ -32,10 +32,10 @@ function App() {
       element: <Mypantry/>,
     },
     {
-      path: "/",
+      path: "/", //default path is to profile
       element: (
           <AuthRoute>
-          <Home />
+          <Profile />
           </AuthRoute>
       ),
     }
