@@ -54,10 +54,10 @@
     value={searchInput} />
 
   <table>
-    <tr>
+    {/* <tr>
       <th>Country</th>
       <th>Continent</th>
-    </tr>
+    </tr> */}
 
   {countries.map((country, index) => {
 
