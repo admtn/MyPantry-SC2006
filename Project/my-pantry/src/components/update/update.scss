@@ -12,6 +12,21 @@
         font-weight: 400;
       }
       
+      .savedrecipesButton{
+        margin-top: 10px;
+        border: none;
+        padding: 5px 10px;
+        background-color: rgb(97, 161, 161);
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgb(136, 168, 168);
+        }
+      }
       .updateContainer {
         display: flex;
         margin-top: 70px;
@@ -60,7 +75,7 @@
             
           }
           
-          .updateButton {
+          .updateButton{
             margin-top: 10px;
             border: none;
             padding: 5px 10px;
@@ -69,9 +84,9 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 500;
+            transition: all 0.3s ease;
   
-            &:disabled {
-              cursor: not-allowed;
+            &:hover {
               background-color: rgb(136, 168, 168);
             }
           }

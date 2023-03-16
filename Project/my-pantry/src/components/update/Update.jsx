@@ -81,7 +81,9 @@ const Update = () => {
       <div className="updateWrapper">
         <h3 className="updateTitle">Edit Your Account</h3>
         <span>Email Address: {currentUser.email}</span>
-
+        <button type="submit" className="savedrecipesButton" onClick={()=>{navigate("/savedrecipes")}}>
+              View your saved recipes here 
+            </button>
         <div className="updateContainer">
           <form onSubmit={handleUpdate}>
             <div className="formItem">
