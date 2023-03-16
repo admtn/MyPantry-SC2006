@@ -16,6 +16,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const [toggleEye, setToggleEye] = useState(false);
   const [inputType, setInputType] = useState("password");
   const navigate= useNavigate();
