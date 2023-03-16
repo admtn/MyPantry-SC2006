@@ -18,13 +18,24 @@ import {
       dispatch({ type: "LOGOUT" });
       navigate("/login");
     };
+
+    
   
     return (
       <div className="sidebar">
         <div className="sidebarWrapper">
+          <span onClick = { () => { navigate("/mypantry")}}>
           <MenuLink icon={<LocalDiningOutlined/>} text="MyPantry" />
+          </span>
+
+          <span onClick ={ () => { navigate("/mypantry")}}>
           <MenuLink icon={<ShoppingBasketOutlined/>} text="Nearby Stores" />
+          </span>
+
+          <span onClick ={ () => { navigate("/")}}>
           <MenuLink icon={<AccountCircleOutlined/>} text="Profile" />
+          </span>
+
           <span onClick={handleLogout}>
             <MenuLink icon={<ExitToAppOutlined/>} text="Logout" />
           </span>

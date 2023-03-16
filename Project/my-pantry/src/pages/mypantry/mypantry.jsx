@@ -1,21 +1,27 @@
 import React from "react";
-import Update from "./../../components/update/Update";
+import Update from "../../components/update/Update";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Rightbar from "../../components/rightbar/Rightbar";
-import "../profile/profile.scss"
+import "./mypantry.scss";
+import SearchBar from "../../components/Searchbar";
 
-const mypantry = () => {
+const MyPantry = () => {
   return (
-    <div className="profile">
-      <>
-        <Navbar />
-        <div className="profileContainer">
-          <Sidebar />
+    <div>
+      <Navbar />
+      <div style={{display:"flex", flexDirection:"row"}}>
+        <div style ={{flex:1}}><Sidebar/></div>
+        <div style ={{flex:4}}>
+          <SearchBar/>
+          <h2>hello all</h2>
         </div>
-      </>
+        
+      </div>
+      
+
     </div>
   );
 };
 
-export default mypantry;
+export default MyPantry;
