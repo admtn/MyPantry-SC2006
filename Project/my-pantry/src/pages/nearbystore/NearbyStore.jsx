@@ -1,14 +1,14 @@
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import "./mypantry.scss";
+import "./nearbyStore.scss";
 
-const MyPantry = () => {
+const NearbyStore = () => {
   return (
-    <div className="pantry">
+    <div className="store">
       <>
         <Navbar />
-        <div className="pantryContainer">
+        <div className="storeContainer">
           <Sidebar />
         </div>
       </>
@@ -16,4 +16,4 @@ const MyPantry = () => {
   );
 };
 
-export default MyPantry;
+export default NearbyStore;
