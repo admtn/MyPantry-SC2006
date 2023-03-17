@@ -33,7 +33,6 @@ const inputs = [
     type: "email",
     placeholder:"Email Address",
     errorMessage:"Email Address should be a valid email",
-    pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
     required: true,
   },
   {
@@ -42,6 +41,7 @@ const inputs = [
     type: "text",
     placeholder:"Password",
     errorMessage:"Password should be 8-20 characters and include at least 1 uppercase, 1 lowercase, 1 number, 1 special character",
+    pattern: `(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])[A-Za-z0-9!@#$%^&*()_+]{8,20}$`,
     required: true,
   },
   {

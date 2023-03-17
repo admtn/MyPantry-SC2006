@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import {
-  BrowserRouter,
-  Route,
   createBrowserRouter,
   RouterProvider,
   Navigate,
@@ -10,7 +8,13 @@ import { AuthContext } from "./context/AuthContext";
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+<<<<<<< HEAD
 import Mypantry from './pages/mypantry/Mypantry';
+=======
+import MyPantry from "./pages/mypantry/mypantry";
+import NearbyStore from "./pages/nearbystore/NearbyStore";
+import SavedRecipes from "./pages/viewsavedrecipes/ViewSavedRecipes"
+>>>>>>> main
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -28,17 +32,37 @@ function App() {
       element: <Register />,
     },
     {
-      path: "/mypantry",
-      element: <Mypantry/>,
-    },
-    {
-      path: "/", //default path is to profile
+      path: "/", //to profile
       element: (
           <AuthRoute>
           <Profile />
           </AuthRoute>
       ),
-    }
+    },
+    {
+      path: "/pantry",
+      element: (
+        <AuthRoute>
+        <MyPantry />,
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/store",
+      element: (
+        <AuthRoute>
+        <NearbyStore />,
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/savedrecipes",
+      element: (
+        <AuthRoute>
+        <SavedRecipes />,
+        </AuthRoute>
+      ),
+    },
   ]);
 
   return (

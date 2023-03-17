@@ -17,7 +17,7 @@ const Navbar = () => {
             src={
               currentUser.photoURL
                 ? currentUser.photoURL
-                : "/assets/DefaultProfile.jpg"
+                : "/assets/DefaultProfile.png"
             }
             alt=""
           />
