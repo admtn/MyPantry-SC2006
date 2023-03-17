@@ -11,6 +11,8 @@ import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Mypantry from './pages/mypantry/mypantry';
+import SavedRecipes from "./pages/savedRecipe/SavedRecipes"
+//import SavedRecipes from "./pages/viewsavedrecipes/ViewSavedRecipes";
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -31,6 +33,18 @@ function App() {
       path: "/mypantry",
       element: <Mypantry/>,
     },
+    {
+      path: "/savedRecipe",
+      element: <SavedRecipes/>,
+    },
+    // {
+    //   path: "/savedrecipes",
+    //   element: (
+    //     <AuthRoute>
+    //     <SavedRecipes />,
+    //     </AuthRoute>
+    //   )
+    // },
     {
       path: "/", //default path is to profile
       element: (

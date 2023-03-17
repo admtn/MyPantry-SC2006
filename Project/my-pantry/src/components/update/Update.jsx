@@ -81,7 +81,11 @@ const Update = () => {
       <div className="updateWrapper">
         <h3 className="updateTitle">Edit Your Account</h3>
         <span>Email Address: {currentUser.email}</span>
-
+        <div>
+         <button type="submit" className="savedrecipesButton" onClick={()=>{navigate("/savedRecipe")}}>
+              View your saved recipes here 
+            </button> 
+            </div>
         <div className="updateContainer">
           <form onSubmit={handleUpdate}>
             <div className="formItem">
@@ -139,6 +143,9 @@ const Update = () => {
             <button type="submit" className="updateButton">
               Update Profile
             </button>
+            <div>
+        
+      </div>
           </form>
         </div>
       </div>
