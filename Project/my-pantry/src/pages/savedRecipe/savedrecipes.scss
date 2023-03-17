@@ -28,6 +28,8 @@
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    position: relative;
+    bottom: -30px;
   }
   
   .recipes {
@@ -52,13 +54,14 @@
     outline: none;
     cursor: pointer;
   
-    color: var(--darker);
+    
     font-weight: bold;
     text-transform: uppercase;
   
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    background-color: var(--blue);
+    color: var(--light);
+    background-color: var(--dark);
   }
   
   .buttons {
@@ -66,6 +69,7 @@
     align-items: center;
     margin-top: 2rem;
     margin-left: -0.5rem;
+   
   }
   
   .buttons button {
@@ -90,60 +94,4 @@
     line-height: 1.4;
   }
   
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    text-align: left;
-  }
   
-  .popup-inner {
-    background-color: var(--dark);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 480px;
-    overflow: auto;
-    max-height: calc(100vh - 4rem);
-  }
-  
-  .popup h2 {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group:last-of-type {
-    margin-bottom: 0;
-  }
-  
-  input, textarea {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    resize: vertical;
-    max-height: 200px;
-    margin-bottom: 0.5rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  .form-group button {
-    margin-top: 1rem;
-  }
-
-  .savedRecipesContainer {
-    display: flex;
-}
