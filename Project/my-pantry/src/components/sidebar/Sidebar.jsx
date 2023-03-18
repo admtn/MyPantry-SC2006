@@ -24,11 +24,11 @@ import {
     return (
       <div className="sidebar">
         <div className="sidebarWrapper">
-          <span onClick = { () => { navigate("/mypantry")}}>
+          <span onClick = { () => { navigate("/pantry")}}>
           <MenuLink icon={<LocalDiningOutlined/>} text="MyPantry" />
           </span>
 
-          <span onClick ={ () => { navigate("/mypantry")}}>
+          <span onClick ={ () => { navigate("/store")}}>
           <MenuLink icon={<ShoppingBasketOutlined/>} text="Nearby Stores" />
           </span>
 

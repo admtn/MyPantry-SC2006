@@ -9,6 +9,8 @@ import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/Mypantry';
+import NearbyStore from './pages/nearbystore/NearbyStore';
+import SavedRecipes from './pages/viewsavedrecipes/ViewSavedRecipes';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
