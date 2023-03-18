@@ -15,9 +15,7 @@ const Navbar = () => {
           <img
             className="profileImg"
             src={
-              currentUser.photoURL
-                ? currentUser.photoURL
-                : "/assets/DefaultProfile.png"
+              "/assets/DefaultProfile.png"
             }
             alt=""
           />

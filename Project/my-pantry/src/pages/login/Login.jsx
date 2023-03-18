@@ -62,7 +62,7 @@ const Login = () => {
       dispatch({ type: "LOGIN_FAILURE" });
     });
   };
-
+  //console.log(inputs);
   return (
     <div className='login'>
         <form>
@@ -106,15 +106,6 @@ const Login = () => {
         </div>
         
         <div className="line"></div>
-        
-        <div className="media-options">
-          <Link to="#" 
-          className="facebook" 
-          style={{textDecoration:"none"}}>
-          <FacebookRounded className="facebookIcon"/>
-          <span>Login with Facebook</span>
-           </Link>
-        </div>
 
         <div className="media-options">
           <Link to="#" 
