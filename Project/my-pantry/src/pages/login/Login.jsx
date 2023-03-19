@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  FacebookRounded,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
@@ -101,7 +100,6 @@ const Login = () => {
             className="formSignup"
             style={{ textDecoration: "none" }}
           >
-            {" "}
             SignUp
           </Link>
         </div>

@@ -6,7 +6,7 @@ import {
   updateEmail,
 } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
-import { v4 as uuid } from "uuid";
+import { v4 } from "uuid";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ const Update = () => {
   const [img, setImg] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
- 
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -30,7 +29,7 @@ const Update = () => {
     e.preventDefault();
 
     if (img) {
-      const storageRef=ref(storage, "userImg/"+uuid());
+      const storageRef=ref(storage, "userImg/"+ v4());
       //const storageRef = ref(storage, "usersImg/" + uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -86,30 +85,7 @@ const Update = () => {
         <div className="updateContainer">
           <form onSubmit={handleUpdate}>
             <div className="formItem">
-              <span>Profile Photo</span>
-              <div className="profilePic">
-                <img
-                  src={
-                    img
-                      ? URL.createObjectURL(img)
-                      : "/assets/DefaultProfile.png"
-                  }
-                  alt=""
-                  className="profileImg"
-                />
-                <label htmlFor="file">
-                  <span className="change">Change</span>
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  style={{ display: "none" }}
-                  onChange={(e) => setImg(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="formItem">
-              <label>Username</label>
+              <label>Fullname</label>
               <input
                 className="formInput"
                 type="text"
@@ -119,7 +95,7 @@ const Update = () => {
               />
             </div>
             <div className="formItem">
-              <label>Email</label>
+              <label>Email Address</label>
               <input
                 className="formInput"
                 type="email"
@@ -129,7 +105,7 @@ const Update = () => {
               />
             </div>
             <div className="formItem">
-              <label>Password</label>
+              <label>Enter current password to confirm changes</label>
               <input
                 className="formInput"
                 name="oldPassword"
