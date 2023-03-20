@@ -4,17 +4,20 @@ import Navbar from "../../components/navbar/Navbar";
 import "./mypantry.scss";
 import SearchBar from "../../components/Searchbar";
 import Checkbox from "../../components/checkbox/Checkbox";
+import InputBox from "../../components/inputbox/input";
 
 const MyPantry = () => {
 
   const [Ingr, setIngr] = useState([])
-  const [url,seturl] = useState('http://localhost:3000/ingredients')
+  const [url,seturl] = useState('')
 
-    useEffect( () => {
-      fetch(url)
-      .then(response => response.json())
-      .then(json => setIngr(json))
-    },[url])
+
+
+    // useEffect( () => {
+    //   fetch(url)
+    //   .then(response => response.json())
+    //   .then(json => setIngr(json))
+    // },[url])
 
 
   return (
@@ -23,7 +26,7 @@ const MyPantry = () => {
       <div style={{display:"flex", flexDirection:"row"}}>
         <div style ={{flex:1}}><Sidebar/></div>
         <div style ={{flex:4}}>
-          <SearchBar/>
+          <InputBox/>
           <div className="container">
           {Ingr.map((item,index) =>(
             <div className ="item">
