@@ -9,11 +9,16 @@ import InputBox from "../../components/inputbox/input";
 const MyPantry = () => {
 
   const [Ingr, setIngr] = useState([])
-  const [url,seturl] = useState('https://edamam-recipe-search.p.rapidapi.com/search?q=steak')
+  const [url,seturl] = useState('https://edamam-recipe-search.p.rapidapi.com/search?q=egg')
+  const [value, setValue] = useState('');
+
+  function handleChange(event) {
+    setValue(event.target.value);
+  }
   const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': 'b66fbaaab8msh010a648f16505e6p1e88f1jsn1d336377b0f2',
+        'X-RapidAPI-Key': '', //enter key here
         'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
     }
 };
@@ -22,7 +27,7 @@ const MyPantry = () => {
       fetch(url, options)
       .then(response => response.json())
       .then(json => setIngr(json))
-    },[url])
+    },[url],Ingr)
 
   return (
     <div>
@@ -30,11 +35,24 @@ const MyPantry = () => {
       <div style={{display:"flex", flexDirection:"row"}}>
         <div style ={{flex:1}}><Sidebar/></div>
         <div style ={{flex:4}}>
-          <InputBox/>
+          <div>
+              <label htmlFor="input-box">Enter text:</label>
+              <input
+                type="text"
+                id="input-box"
+                value={value}
+                onChange={handleChange}
+              />
+              <button onClick={()=>{
+                seturl('https://edamam-recipe-search.p.rapidapi.com/search?q='+value)
+              }}>Search</button>
+          </div>
           <div className="container">
           {Ingr.hits && Ingr.hits.map((item,index) =>(
             <div className ="item">
+              <div className ="item">
               <h5>{item.recipe.label}</h5>
+              </div>
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
               <span onClick={() => console.log('you clicked!')}>
               <img src={item.recipe.image} width ="100" height = "100"/>
