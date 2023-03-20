@@ -16,7 +16,10 @@ function InputBox() {
         value={value}
         onChange={handleChange}
       />
-      <button>Search</button>
+      <button onClick={()=>{
+        console.log('dad')
+
+      }}>Search</button>
     </div>
   );
 }
