@@ -52,6 +52,7 @@ const MyPantry = () => {
             <div className ="item">
               <div className ="item">
               <h5>{item.recipe.label}</h5>
+              <a href={item.recipe.url}>Click here for more information</a>
               </div>
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
               <span onClick={() => console.log('you clicked!')}>
