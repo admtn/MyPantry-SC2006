@@ -12,16 +12,7 @@ const Navbar = () => {
           <span className="logo">MyPantry</span>
         </div>
         <div className="navbarRight">
-          <img
-            className="profileImg"
-            src={
-              currentUser.photoURL
-                ? currentUser.photoURL
-              :"/assets/DefaultProfile.png"
-            }
-            alt=""
-          />
-          <span className="navbarName">{currentUser.displayName}</span>
+          <span alt="" className="navbarName">{currentUser.displayName}</span>
         </div>
       </div>
     </div>
