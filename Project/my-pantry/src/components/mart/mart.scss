@@ -1,0 +1,44 @@
+.mart {
+    flex: 9;
+  
+    .martWrapper {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      
+      .martTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+      
+      .curLocationButton{
+        margin-top: 10px;
+        border: none;
+        padding: 5px 10px;
+        background-color: rgb(97, 161, 161);
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgb(136, 168, 168);
+        }
+      }
+
+      .martContainer {
+        display: flex;
+        margin-top: 20px;
+        padding-top: 10px;
+          
+        }
+
+        // .eachMart {
+
+        // }
+  
+    }
+  }
+  
