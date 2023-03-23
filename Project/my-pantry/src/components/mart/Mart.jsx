@@ -1,11 +1,15 @@
 import React from "react";
 import "./mart.scss";
-//import CurLocation from "../../components/curLocation/CurLocation";
+import Location from "../../components/location/Location";
 
-import { storage } from "../../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
-import CurLocation from "../curLocation/CurLocation";
+// import { storage } from "../../firebase";
+// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+// import { useNavigate } from "react-router-dom";
+
+//import { ScriptTag } from "react-script-tag";
+// const Loc = props => (
+// <script type="text/javascript" src="/../../components/location/Location.js" />
+// )
 
 const Mart = () => {
   
@@ -17,7 +21,8 @@ const Mart = () => {
             {/* <button className="curLocationButton" onClick={()=>{CurLocation}}>
               Current Location
             </button> */}
-            {/* <CurLocation /> */}
+            <Location />
+            {/* <Loc className="loc"/> */}
         </div>
       </div>
     </div>
