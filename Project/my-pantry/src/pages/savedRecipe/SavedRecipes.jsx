@@ -2,7 +2,7 @@ import {db} from "../../firebase"
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Rightbar from "../../components/rightbar/Rightbar";
-import {useState, useEffect} from "react"
+import {useState, useEffect, handleView} from "react"
 import {
     collection,
     onSnapshot,
