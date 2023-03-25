@@ -7,27 +7,30 @@ import Checkbox from "../../components/checkbox/Checkbox";
 import InputBox from "../../components/inputbox/input";
 
 const MyPantry = () => {
+  const apikey = '&apiKey=7e512d08fbb14992a0d712854865b4eb'
+  const [Rec, secRec] = useState([])
+  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&apiKey=7e512d08fbb14992a0d712854865b4eb')
 
-  const [Ingr, setIngr] = useState([])
-  const [url,seturl] = useState('https://edamam-recipe-search.p.rapidapi.com/search?q=')
-  const [value, setValue] = useState('');
+  const [RecInfo, setRecInfo] = useState([])
+  const [RecipeInfoUrl,setRecipeInfoUrl] = useState('https://api.spoonacular.com/recipes/716429/information?includeNutrition=false')
+
+  const [value, setValue] = useState('');//search bar
 
   function handleChange(event) {
     setValue(event.target.value);
   }
-  const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '993bac5231msh57443b7e206d247p14283djsn29f8a9d777a5', //enter key here
-        'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
-    }
-};
 
     useEffect( () => {
-      fetch(url, options)
+      fetch(url)
       .then(response => response.json())
-      .then(json => setIngr(json))
-    },[url],Ingr)
+      .then(json => secRec(json))
+    },[url],Rec)
+
+    useEffect( () => {
+      fetch(RecipeInfoUrl)
+      .then(response => response.json())
+      .then(json => setRecInfo(json))
+    },[RecipeInfoUrl],RecInfo)
 
   return (
     <div>
@@ -48,15 +51,19 @@ const MyPantry = () => {
               }}>Search</button>
           </div>
           <div className="container">
-          {Ingr.hits && Ingr.hits.map((item,index) =>(
+          {Rec && Rec.map((item,index) =>(
             <div className ="item">
               <div className ="item">
-              <h5>{item.recipe.label}</h5>
-              <a href={item.recipe.url}>Click here for more information</a>
+              { () =>{setRecipeInfoUrl('https://api.spoonacular.com/recipes/'+Rec.id+'/information?includeNutrition=false'+apikey)
+                  fetch(RecipeInfoUrl)
+                  .then(response => response.json())
+                  .then(json => setRecInfo(json))}}
+              <h5>{item.title}</h5>
+              <a href={RecInfo.sourceUrl}>Click here for more information</a>
               </div>
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
               <span onClick={() => console.log('you clicked!')}>
-              <img src={item.recipe.image} width ="100" height = "100"/>
+              <img src={item.image} width ="100" height = "100"/>
               </span>
               <Checkbox/>
             </div>
