@@ -9,7 +9,7 @@ import InputBox from "../../components/inputbox/input";
 const MyPantry = () => {
 
   const [Ingr, setIngr] = useState([])
-  const [url,seturl] = useState('https://edamam-recipe-search.p.rapidapi.com/search?q=egg')
+  const [url,seturl] = useState('https://edamam-recipe-search.p.rapidapi.com/search?q=')
   const [value, setValue] = useState('');
 
   function handleChange(event) {
@@ -18,7 +18,7 @@ const MyPantry = () => {
   const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '', //enter key here
+        'X-RapidAPI-Key': '993bac5231msh57443b7e206d247p14283djsn29f8a9d777a5', //enter key here
         'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
     }
 };
