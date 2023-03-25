@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "./../../context/AuthContext";
 
 const Register = () => {
   const { dispatch } = useContext(AuthContext);
@@ -81,7 +81,7 @@ const Register = () => {
       });
     } catch (error) {}
   };
-
+    
   const signInWithGoogle = () => {
     dispatch({ type: "LOGIN_START" });
 

@@ -10,7 +10,6 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/mypantry';
 import NearbyStore from './pages/nearbystore/NearbyStore';
-import SavedRecipes from './pages/viewsavedrecipes/ViewSavedRecipes';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -48,14 +47,6 @@ function App() {
       element: (
         <AuthRoute>
         <NearbyStore />,
-        </AuthRoute>
-      ),
-    },
-    {
-      path: "/savedrecipes",
-      element: (
-        <AuthRoute>
-        <SavedRecipes />,
         </AuthRoute>
       ),
     },
