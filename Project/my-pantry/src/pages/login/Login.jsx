@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <div className="login">
       <form>
-        <h2>Login</h2>
+        <h1>Login Form</h1>
         <div className="formInput">
           <input
             type="email"
@@ -98,8 +98,8 @@ const Login = () => {
           <Link
             to="/register"
             className="formSignup"
-            style={{ textDecoration: "none" }}
-          >
+            style={{ textDecoration: "underlined", color:"black" }}
+          > {""}
             SignUp
           </Link>
         </div>
