@@ -2,14 +2,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    
 }
 
 .item{
     margin: 10px; //margin sets the distance between each .item element
-    border: 2px solid black;
+    
+    
 }
-
-.title {
-    word-wrap: break-word; /* set the word-wrap property to break-word */
-  }
