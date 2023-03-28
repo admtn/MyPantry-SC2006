@@ -26,7 +26,7 @@ const MyPantry = () => {
   }
 
   function setfetchnavigate(recipeid) {
-    setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
+    // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
     fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
     .then(response => response.json())
     .then(json => window.open(json.sourceUrl, "_blank"));
@@ -52,7 +52,7 @@ const MyPantry = () => {
         <div style ={{flex:1}}><Sidebar/></div>
         <div style ={{flex:4}}>
           <div>
-              <label htmlFor="input-box">Enter text:</label>
+              <label htmlFor="input-box">Enter ingredients:</label>
               <input
                 type="text"
                 id="input-box"
@@ -60,7 +60,7 @@ const MyPantry = () => {
                 onChange={handleChange}
               />
               <button onClick={()=>{
-                seturl('https://edamam-recipe-search.p.rapidapi.com/search?q='+value)
+                seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
               }}>Search</button>
           </div>
           <div className="container">
