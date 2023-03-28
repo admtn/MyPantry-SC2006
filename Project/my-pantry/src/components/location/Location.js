@@ -29,8 +29,8 @@ class Location extends React.Component {
 	
 	render() {
 		const { DataisLoaded, items } = this.state;
-		if (!DataisLoaded) return <div>
-			<h1> Please wait some time.... </h1> </div> ;
+		if (!DataisLoaded) return <div className="loadpage">
+			<h2> Loading... </h2> </div> ;
 
 		return (
 		<div className = "Location">

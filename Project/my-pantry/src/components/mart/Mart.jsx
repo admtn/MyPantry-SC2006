@@ -1,6 +1,6 @@
 import React from "react";
 import "./mart.scss";
-import Location from "../../components/location/Location";
+import SearchMart from "../SearchMart";
 
 // import { storage } from "../../firebase";
 // import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -21,7 +21,7 @@ const Mart = () => {
             {/* <button className="curLocationButton" onClick={()=>{CurLocation}}>
               Current Location
             </button> */}
-            <Location />
+            <SearchMart />
             {/* <Loc className="loc"/> */}
         </div>
       </div>
