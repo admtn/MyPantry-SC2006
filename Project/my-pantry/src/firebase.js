@@ -3,6 +3,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getStorage} from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
 import {getFirestore} from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyABzG4Xk8vnToAEs_q2l0xl4t9Z820T9xY",
@@ -23,3 +24,14 @@ export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 export {db};
 export default app;
+
+try {
+  const docRef = await addDoc(collection(db,  "users"), {
+    first: "Ada",
+    last: "Lovelace",
+    born: 1815
+  });
+  console.log("Document written with ID: ", docRef.id);
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
