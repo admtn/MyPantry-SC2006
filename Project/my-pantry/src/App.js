@@ -9,6 +9,7 @@ import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/Mypantry';
+import ShowIngredients from './pages/mypantry/Ingredients';
 import NearbyStore from './pages/nearbystore/NearbyStore';
 import SavedRecipes from './pages/viewsavedrecipes/ViewSavedRecipes';
 
@@ -19,6 +20,12 @@ function App() {
   };
 
   const router = createBrowserRouter([
+    {
+      path:"/ingredients",
+      element:(
+      <ShowIngredients/>
+      )
+    },
     {
       path: "/login",
       element: <Login />,

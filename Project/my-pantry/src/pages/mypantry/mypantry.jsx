@@ -5,6 +5,7 @@ import "./mypantry.scss";
 import SearchBar from "../../components/Searchbar";
 import Checkbox from "../../components/checkbox/Checkbox";
 import InputBox from "../../components/inputbox/input";
+import { useNavigate } from "react-router-dom";
 
 const MyPantry = () => {
   const apikey = '&apiKey=8b4379dc21bc4c1aa94cb4a62fdb130c'
@@ -60,7 +61,9 @@ const MyPantry = () => {
                 onChange={handleChange}
               />
               <button onClick={()=>{
-                seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
+                // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
+                navigate("/ingredients")
+
               }}>Search</button>
           </div>
           <div className="container">
