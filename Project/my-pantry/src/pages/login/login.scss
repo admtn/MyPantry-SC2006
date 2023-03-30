@@ -24,7 +24,8 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-            
+                position: relative;
+
                 input{
                     padding: 10px;
                     margin: 7px 0px;
@@ -33,15 +34,13 @@
                     font-size: 16px;
                     font-weight: 400;
                 }
-        }
-        .eyeIcon{
-            position: absolute;
-            top: 415px;
-            right: 300px;
-            font-size: 18px !important;
-            padding: 5px;
-            color: #3a39397f;
-            cursor: pointer;
+                .eyeIcon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                  }
         }
 
         button{
@@ -115,7 +114,7 @@
             object-fit: cover;
             top: 50%;
             left: 15px;
-            transform: translateY(-50%,)
+            transform: translateY(-50%)
         }
 
         .facebook.google{

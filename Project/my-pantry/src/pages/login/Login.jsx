@@ -31,6 +31,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
+    
     try {
       signInWithEmailAndPassword(auth, inputs.email, inputs.password).then(
         (userCredential) => {
