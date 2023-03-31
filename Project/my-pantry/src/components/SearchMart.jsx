@@ -23,7 +23,8 @@ const SearchMart = () => {
           label="Enter a location"
         />
       </div>
-      <Location input={inputText} />
+      {/* <Location input={inputText} /> */}
+      <Location />
     </div>
   );
 }

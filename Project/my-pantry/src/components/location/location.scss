@@ -1,31 +1,18 @@
-.Location {
-	text-align: left;
-	color: rgb(93, 157, 230);
-}
-.loadpage{
-	text-align: center;
-	color:#505358;
-	width: 200px;
-}
-.Location-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+.loc {	
+	margin: 0 auto;
+	padding: 20px;
+	justify-content: top;
 	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-.Location-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
+	width: 990px;
+  
+	h1 {
+	  font-size: 24px;
+	  margin-bottom: 10px;
 	}
-	to {
-		transform: rotate(360deg);
+	
+	.map {
+	height: 500px;
+    margin-top: 50px;
+	margin-bottom: 50px;
 	}
-}
+  }
