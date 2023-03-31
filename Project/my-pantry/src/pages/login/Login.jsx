@@ -6,7 +6,10 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import { auth, provider } from "../../firebase";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { AuthContext } from "./../../context/AuthContext";
 
 const Login = () => {
@@ -62,6 +65,16 @@ const Login = () => {
         dispatch({ type: "LOGIN_FAILURE" });
       });
   };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendPasswordResetEmail(auth, inputs.email);
+      alert("Password reset email sent. Please check your inbox.");
+    } catch (error) {
+      alert("Error sending password reset email. Please try again.");
+    }
+  };
   // console.log(inputs);
   return (
     <div className="login">
@@ -93,7 +106,6 @@ const Login = () => {
         <button type="submit" onClick={handleLogin}>
           Login
         </button>
-
         <div className="formLink">
           <span>Don't have an account? </span>
           <Link
@@ -104,7 +116,6 @@ const Login = () => {
             SignUp
           </Link>
         </div>
-
         <div className="line"></div>
         <div className="media-options">
           <Link

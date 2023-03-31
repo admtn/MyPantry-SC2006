@@ -35,7 +35,6 @@ const Register = () => {
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -68,7 +67,7 @@ const Register = () => {
             setErrMsg("Invalid Entry");
             return;
         }
-        
+    
         try {
             await createUserWithEmailAndPassword(
               auth,
@@ -82,8 +81,15 @@ const Register = () => {
               });
               navigate("/login");
             });
-          } catch (error) {}
+        } catch (error) {
+            if (error.code === "auth/email-already-in-use") {
+              setErrMsg("This email is already in use.");
+            } else {
+              setErrMsg("An error occurred. Please try again.");
+            }
+        }
     }
+    
 
     return (
         <div className="register">

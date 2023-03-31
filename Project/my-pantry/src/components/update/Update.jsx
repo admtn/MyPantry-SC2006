@@ -18,8 +18,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Update = () => {
   const userRef = useRef();
-    const errRef = useRef();
-
+  
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -32,7 +31,6 @@ const Update = () => {
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
 
-    const [errMsg, setErrMsg] = useState('');
     useEffect(() => {
       userRef.current.focus();
     }, [])
@@ -49,20 +47,16 @@ const Update = () => {
         setValidPwd(PWD_REGEX.test(pwd));
     }, [pwd])
 
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
-
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  
   const handleUpdate = async (e) => {
     e.preventDefault();
     const v1 = USER_REGEX.test(user);
     const v2 = PWD_REGEX.test(pwd);
     const v3 = EMAIL_REGEX.test(email);
     if (!v1 || !v2 || !v3){
-          setErrMsg("Invalid Entry");
           return;
         }
     else {
@@ -84,6 +78,8 @@ const Update = () => {
 
     navigate("/login");
   };
+  
+
   // console.log(data);
   return (
     <div className="update">
@@ -170,5 +166,4 @@ const Update = () => {
     </div>
   );
 };
-
 export default Update;
