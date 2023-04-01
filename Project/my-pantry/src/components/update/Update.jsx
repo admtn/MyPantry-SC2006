@@ -62,34 +62,52 @@ const Update = () => {
     const v3 = EMAIL_REGEX.test(email);
     if (!v1 || !v2 || !v3) {
       return;
-    } else {
+    }
+  
+    try {
+      const credential = EmailAuthProvider.credential(currentUser.email, pwd);
+      await reauthenticateWithCredential(currentUser, credential);
+  
+      // Save the current email to revert back in case of error
+      const currentEmail = currentUser.email;
+  
+      try {
+        // Update the email and check for errors
+        await updateEmail(currentUser, email);
+  
+        // Send verification email after updating the email
+        await sendEmailVerification(currentUser).then(() => {
+          console.log("Email verification sent");
+        });
+      } catch (error) {
+        if (error.code === "auth/email-already-in-use") {
+          // Revert email change if there's a duplicate email error
+          await updateEmail(currentUser, currentEmail);
+          alert("This email is already in use, please use another email.");
+          return;
+        } else {
+          alert("An error occurred while updating the email. Please try again.");
+          return;
+        }
+      }
+  
+      // Update the username if there's no duplicate email error
       await updateProfile(currentUser, {
         displayName: user,
       });
-      const credential = EmailAuthProvider.credential(
-        currentUser.email,
-        pwd
-      );
-
-      await reauthenticateWithCredential(currentUser, credential).then(
-        async () => {
-          // User re-authenticated.
-          await updateEmail(currentUser, email);
-
-          // Send verification email after updating the email
-          await sendEmailVerification(currentUser).then(() => {
-            console.log("Email verification sent");
-          });
-        }
-      );
+  
       alert(
         "Account updated successfully! Please check your email inbox for a verification email."
       );
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+      return;
     }
-    setTimeout(() => {
-      navigate("/login");
-    }, 5000);
   };
+  
   
 
   // console.log(data);

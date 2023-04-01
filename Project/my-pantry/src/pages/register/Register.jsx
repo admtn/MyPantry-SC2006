@@ -92,7 +92,7 @@ const Register = () => {
             });
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
-              setErrMsg("This email is already in use.");
+              setErrMsg("This email is already in use, please use another email.");
             } else {
               setErrMsg("An error occurred. Please try again.");
             }
