@@ -1,17 +1,16 @@
 .sidebar {
-    flex: 0.6;
-    height: calc(100vh - 51px);
-    border-right: solid 1px rgb(72, 55, 55);
-    
-    .sidebarWrapper {
-      padding: 0px;
-    }
+  flex: 0.6;
+  height: calc(100vh - 51px);
+  border-right: solid 1px rgb(72, 55, 55);
+  
+  .sidebarWrapper {
+    padding: 0px;
   }
-  
-  
-  @media only screen and (max-width: 940px) {
-    .sidebar {
-      flex: 1;
-    }
+}
+
+
+@media only screen and (max-width: 940px) {
+  .sidebar {
+    flex: 1;
   }
-  
+}
