@@ -9,32 +9,40 @@
     form{
         background-color: white;
         max-width: 400px;
-        padding: 20px;
+        padding: 1rem;
         width: 100%;
         border-radius: 5px;
         
-        h2{
-            font-size: 20px;
+        h1{
+            font-size: 30px;
             font-weight: bold;
             color: #232836;
             text-align: center;
         }
 
         .formInput{
-            position: relative;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                position: relative;
 
+                input{
+                    padding: 10px;
+                    margin: 7px 0px;
+                    border: 1px solid #cacaca;
+                    outline: none; 
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+                .eyeIcon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                  }
         }
-        .eyeIcon{
-            position: absolute;
-            top: 13px;
-            right: 0;
-            font-size: 18px !important;
-            padding: 5px;
-            color: #3a39397f;
-            cursor: pointer;
 
-
-        }
         button{
             font-size: 18px;
             height: 50px;
@@ -95,7 +103,7 @@
             }
         }
 
-        .facebookIcon, .googleImg{
+        .googleImg{
             position: absolute;
             display: flex;
             align-items: center;
@@ -106,13 +114,14 @@
             object-fit: cover;
             top: 50%;
             left: 15px;
-            transform: translateY(-50%,)
+            transform: translateY(-50%)
         }
 
         .facebook.google{
             background-color: #222;
             color: white;
             border: 1px solid #cacaca;
+            transition: all 0.3 ease;
 
             &:hover{
                 background-color: #000;

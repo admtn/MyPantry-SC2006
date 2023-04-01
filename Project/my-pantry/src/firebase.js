@@ -11,15 +11,16 @@ const firebaseConfig = {
   storageBucket: "mypantry-a5508.appspot.com",
   messagingSenderId: "246039468508",
   appId: "1:246039468508:web:aafad9d1f6641599e35719",
-  measurementId: "G-X7D8WG43V2"
 };
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db= getFirestore(app);
 
-export const storage = getStorage();
 export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider();
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
+export const provider = new GoogleAuthProvider(app);
 export {db};
+
 export default app;

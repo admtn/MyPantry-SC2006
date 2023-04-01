@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './formInput.scss';
 
 const 
@@ -13,8 +13,8 @@ FormInput = (props) => {
         <input 
          {...inputProps} 
          onChange={onChange} 
-         onFocus={()=>inputProps.name === "confirmPassword" && setFocused(true)}
          onBlur={handleFocus} 
+         onFocus={()=>inputProps.name === "confirmPassword" && setFocused(true)}
          focused={focused.toString()}
          />
         <span className="errorMessage">{errorMessage}</span>
