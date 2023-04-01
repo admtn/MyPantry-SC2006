@@ -73,16 +73,6 @@ const Login = () => {
         dispatch({ type: "LOGIN_FAILURE" });
       });
   };
-
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    try {
-      await sendPasswordResetEmail(auth, inputs.email);
-      alert("Password reset email sent. Please check your inbox.");
-    } catch (error) {
-      alert("Error sending password reset email. Please try again.");
-    }
-  };
   // console.log(inputs);
   return (
     <div className="login">
