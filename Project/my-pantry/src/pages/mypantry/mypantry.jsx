@@ -6,6 +6,7 @@ import SearchBar from "../../components/Searchbar";
 import Checkbox from "../../components/checkbox/Checkbox";
 import InputBox from "../../components/inputbox/input";
 import { useNavigate } from "react-router-dom";
+import ShowIngredients from "./Ingredients"
 
 const MyPantry = () => {
   const apikey = '&apiKey=8b4379dc21bc4c1aa94cb4a62fdb130c'
@@ -15,7 +16,7 @@ const MyPantry = () => {
 // 8b4379dc21bc4c1aa94cb4a62fdb130c
 
   const [Rec, setRec] = useState([])
-  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+apikey)
+  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=1'+apikey)
 
   const [RecInfo, setRecInfo] = useState([])
   const [RecipeInfoUrl,setRecipeInfoUrl] = useState('')
@@ -39,6 +40,10 @@ const MyPantry = () => {
       .then(json => setRec(json))
     },[url],)
 
+
+  function setalling() {
+    seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+theArray.join(",+"))
+  }
     // useEffect( () => {
     //   fetch(RecipeInfoUrl)
     //   .then(response => response.json())
@@ -50,7 +55,8 @@ const MyPantry = () => {
     <div>
       <Navbar />
       <div style={{display:"flex", flexDirection:"row"}}>
-        <div style ={{flex:1}}><Sidebar/></div>
+        <div style ={{flex:2}}>
+          <Sidebar/><ShowIngredients/></div>
         <div style ={{flex:4}}>
           <div>
               <label htmlFor="input-box">Enter ingredients:</label>
@@ -62,7 +68,9 @@ const MyPantry = () => {
               />
               <button onClick={()=>{
                 // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
-                navigate("/ingredients")
+                setalling
+                console.log(url)
+                // navigate("/ingredients")
               }}>Search</button>
           </div>
           <div className="container">
@@ -71,7 +79,7 @@ const MyPantry = () => {
               <h5 style={{ maxWidth: '150px', margin:'30px' }}>{item.title}</h5>             
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
               <span onClick={() => setfetchnavigate(item.id)}
-              style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover"}}>
+              style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover",cursor:'pointer'}}>
               <img src={item.image} />
               </span>
               <Checkbox/>
