@@ -11,7 +11,6 @@ import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/mypantry';
 import NearbyStore from './pages/nearbystore/NearbyStore';
 import ForgotPassword from './pages/forgotpassword/ForgotPassword';
-import SavedRecipes from './pages/savedRecipe/SavedRecipes';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
