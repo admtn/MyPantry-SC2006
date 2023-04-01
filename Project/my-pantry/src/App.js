@@ -41,6 +41,14 @@ function App() {
       ),
     },
     {
+      path: "/savedrecipes", //to profile
+      element: (
+          <AuthRoute>
+          <SavedRecipes />
+          </AuthRoute>
+      ),
+    },
+    {
       path: "/pantry",
       element: (
         <AuthRoute>
