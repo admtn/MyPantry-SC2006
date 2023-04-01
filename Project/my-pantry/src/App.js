@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/mypantry';
 import NearbyStore from './pages/nearbystore/NearbyStore';
+import ForgotPassword from './pages/forgotpassword/ForgotPassword';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/forgotpassword",
+      element: <ForgotPassword />,
     },
     {
       path: "/register",

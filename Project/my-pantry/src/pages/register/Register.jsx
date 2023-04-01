@@ -7,6 +7,7 @@ import { auth } from "../../firebase";
 import {
   updateProfile,
   createUserWithEmailAndPassword,
+  sendEmailVerification
 } from "firebase/auth";
 
 const USER_REGEX = /^[A-z][A-z0-9]{3,19}$/;
@@ -17,6 +18,7 @@ const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
     const navigate = useNavigate();
+    const [alertMsg, setAlertMsg] = useState('');
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -53,13 +55,13 @@ const Register = () => {
         setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd])
 
+
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         const v3 = EMAIL_REGEX.test(email);
@@ -73,13 +75,20 @@ const Register = () => {
               auth,
               email,
               pwd,
-            ).then((userCredential) => {
-              // Signed in
-              const user = userCredential.user;
-              updateProfile(user, {
+            ).then(async (userCredential) => {
+              const newUser = userCredential.user;
+              await updateProfile(newUser, {
                 displayName: user,
               });
-              navigate("/login");
+              
+              await sendEmailVerification(newUser).then(() => {
+                setAlertMsg("Account created successfully! Please check your email inbox for a verification email.");
+              });
+    
+              // Add a delay before navigating to the login page
+              setTimeout(() => {
+                navigate("/login");
+              }, 5000);
             });
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
@@ -95,6 +104,7 @@ const Register = () => {
         <div className="register">
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <p className={alertMsg ? "alertmsg" : "offscreen"} aria-live="polite">{alertMsg}</p>
                     <h1>Registration Form</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">

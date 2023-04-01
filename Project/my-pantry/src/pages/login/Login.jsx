@@ -31,24 +31,32 @@ const Login = () => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
-    
+  
     try {
-      signInWithEmailAndPassword(auth, inputs.email, inputs.password).then(
-        (userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          dispatch({ type: "LOGIN_SUCCESS", payload: user });
-          // console.log(user);
-          navigate("/pantry");
-        }
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        inputs.email,
+        inputs.password
       );
+  
+      const user = userCredential.user;
+      if (user.emailVerified) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        navigate("/pantry");
+      } else {
+        dispatch({ type: "LOGIN_FAILURE" });
+        alert("Your email is not verified. Please check your email inbox for a verification email.");
+      }
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
+      // You may want to display an error message depending on the error
+      alert("Error signing in. Please check your email and password.");
     }
   };
+  
 
   const signInWithGoogle = () => {
     dispatch({ type: "LOGIN_START" });
@@ -103,6 +111,12 @@ const Login = () => {
             {toggleEye ? <Visibility /> : <VisibilityOff />}
           </div>
         </div>
+        <Link
+          to="/forgotpassword"
+          style={{ textDecoration: "underline", color: "black" }}
+        >
+          Forgot Password?
+        </Link>
         <button type="submit" onClick={handleLogin}>
           Login
         </button>
