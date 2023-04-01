@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./mypantry.scss";
 import "./ingredients.scss";
 import { collection, getDocs,getFirestore, docs, doc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const ShowIngredients = () => {
+    const navigate = useNavigate();
 
     //to fetch from firestore
     const [ingredients, setIngredients] = useState([]);
+    const [theArray, setTheArray] = useState([]);
+    const remove = (index) => {
+      if (index !== -1) {
+        setTheArray([
+          ...theArray.slice(0, index),
+          ...theArray.slice(index + 1)
+        ]);
+      }
+    };
+
     useEffect(() => {
         const fetchIngredients = async () => {
           const db = getFirestore();
@@ -25,6 +37,14 @@ const ShowIngredients = () => {
         setIsOn(!isOn);
       };
 
+      function handleChange(event) {
+        setValue(event.target.value);
+      }
+
+
+
+      const [value, setValue] = useState('');//search bar
+
       //button styling
       const buttonStyle = {
         color: 'black',
@@ -33,18 +53,51 @@ const ShowIngredients = () => {
         // border: 'none',
         cursor: 'pointer',
         margin: 10,
+        fontSize:20
       };
     
   return (
     <div>
-        {ingredients && ingredients.map((item) => (
-          <button onClick={handleToggle}><span style={isOn?buttonStyle:{fontSize:10}}>{item.name}</span></button>
-          // <button><span style={{fontSize:30}}>{item.name}</span></button>
-            
-    
+        <div>
+          <div>{theArray && theArray.map((i,index)=>(
+            // <div style={{borderWidth:10,flexDirection:'row'}}>
+            // <span style={{fontSize:30}}>{i} , </span>
+            <button onClick={()=>{remove(index)}} style={buttonStyle}>{i}</button>
+            // </div>
+          ))}
+          </div>
+
+          <button onClick={()=>{setTheArray([])}} style={buttonStyle}>clear</button>
+          
+
+          <div>
+            <label htmlFor="input-box">Enter ingredients:</label>
+            <input
+              type="text"
+              id="input-box"
+              value={value}
+              onChange={handleChange}
+            />
+            <button onClick={()=>{
+              // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
+              navigate("/pantry")
+            }}>Search</button>
+          </div>
+
+        </div>
+
+        <div>
+        {ingredients && ingredients.map((item,id) => (
+          <button onClick={ () => {setTheArray(theArray => [...theArray, item.name])
+            console.log(theArray)
+          }
+          }><span style={isOn?buttonStyle:{fontSize:30}}>{item.name}</span></button>
+          // <button><span style={{fontSize:30}}>{item.name}</span></button>\
         ))}
+        
+        </div>
     </div> 
-  );
+  );w
 };
 
 export default ShowIngredients;

@@ -15,7 +15,7 @@ const MyPantry = () => {
 // 8b4379dc21bc4c1aa94cb4a62fdb130c
 
   const [Rec, setRec] = useState([])
-  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+chicken,+egg,+chilli,+sausage&number=3'+apikey)
+  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+apikey)
 
   const [RecInfo, setRecInfo] = useState([])
   const [RecipeInfoUrl,setRecipeInfoUrl] = useState('')
@@ -63,7 +63,6 @@ const MyPantry = () => {
               <button onClick={()=>{
                 // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
                 navigate("/ingredients")
-
               }}>Search</button>
           </div>
           <div className="container">
