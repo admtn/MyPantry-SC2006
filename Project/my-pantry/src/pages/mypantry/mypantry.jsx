@@ -4,17 +4,45 @@ import Navbar from "../../components/navbar/Navbar";
 import "./mypantry.scss";
 import SearchBar from "../../components/Searchbar";
 import Checkbox from "../../components/checkbox/Checkbox";
+import InputBox from "../../components/inputbox/input";
 
 const MyPantry = () => {
+  const apikey = '&apiKey=8b4379dc21bc4c1aa94cb4a62fdb130c'
+  
+// 7e512d08fbb14992a0d712854865b4eb
+// 4da76519f82242caa825c7db58bdf9f1
+// 8b4379dc21bc4c1aa94cb4a62fdb130c
 
-  const [Ingr, setIngr] = useState([])
-  const [url,seturl] = useState('http://localhost:3000/ingredients')
+  const [Rec, setRec] = useState([])
+  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+chicken,+egg,+chilli,+sausage&number=3'+apikey)
+
+  const [RecInfo, setRecInfo] = useState([])
+  const [RecipeInfoUrl,setRecipeInfoUrl] = useState('')
+
+  const [value, setValue] = useState('');//search bar
+
+  function handleChange(event) {
+    setValue(event.target.value);
+  }
+
+  function setfetchnavigate(recipeid) {
+    // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
+    fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
+    .then(response => response.json())
+    .then(json => window.open(json.sourceUrl, "_blank"));
+  }
 
     useEffect( () => {
       fetch(url)
       .then(response => response.json())
-      .then(json => setIngr(json))
-    },[url])
+      .then(json => setRec(json))
+    },[url],)
+
+    // useEffect( () => {
+    //   fetch(RecipeInfoUrl)
+    //   .then(response => response.json())
+    //   .then(json => setRecInfo(json))
+    // },[RecipeInfoUrl])
 
 
   return (
@@ -23,14 +51,26 @@ const MyPantry = () => {
       <div style={{display:"flex", flexDirection:"row"}}>
         <div style ={{flex:1}}><Sidebar/></div>
         <div style ={{flex:4}}>
-          <SearchBar/>
+          <div>
+              <label htmlFor="input-box">Enter ingredients:</label>
+              <input
+                type="text"
+                id="input-box"
+                value={value}
+                onChange={handleChange}
+              />
+              <button onClick={()=>{
+                seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
+              }}>Search</button>
+          </div>
           <div className="container">
-          {Ingr.map((item,index) =>(
+          {Rec && Rec.map((item,index) =>(
             <div className ="item">
-              <h2>{item.name}</h2>
+              <h5 style={{ maxWidth: '150px', margin:'30px' }}>{item.title}</h5>             
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
-              <span onClick={() => console.log('you clicked!')}>
-              <img src={item.image} width ="100" height = "100"/>
+              <span onClick={() => setfetchnavigate(item.id)}
+              style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover"}}>
+              <img src={item.image} />
               </span>
               <Checkbox/>
             </div>
