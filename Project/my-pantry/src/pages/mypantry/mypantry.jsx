@@ -43,15 +43,7 @@ const MyPantry = () => {
 //     });
 // }
 
-async function run() {
-  try {
-      await setDoc(doc(database, `path`), objData)
-  } catch (e) {
-      console.error(e); // handle your error here
-  } finally {
-      console.log('Cleanup here'); // cleanup, always executed
-  }
-}
+
 
   function setfetchnavigate(recipeid) {
     // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
