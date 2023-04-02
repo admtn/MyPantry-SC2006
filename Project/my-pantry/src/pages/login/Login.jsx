@@ -52,7 +52,6 @@ const Login = () => {
       }
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
-      // You may want to display an error message depending on the error
       alert("Error signing in. Please check your email and password.");
     }
   };
@@ -64,7 +63,6 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
-        // The signed-in user info.
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
         navigate("/");

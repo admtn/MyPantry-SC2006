@@ -85,7 +85,6 @@ const Register = () => {
                 setAlertMsg("Account created successfully! Please check your email inbox for a verification email.");
               });
     
-              // Add a delay before navigating to the login page
               setTimeout(() => {
                 navigate("/login");
               }, 5000);

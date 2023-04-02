@@ -1,7 +1,4 @@
 import {db} from "../../firebase"
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import Rightbar from "../../components/rightbar/Rightbar";
 import {useState, useEffect} from "react"
 import {
     collection,
@@ -52,7 +49,7 @@ import { useNavigate } from "react-router-dom";
         <>My saved recipes</>
         </div>
        
-         <button className="back" onClick={()=>{navigate("/mypantry")}}>back </button> 
+         <button className="back" onClick={()=>{navigate("/pantry")}}>back </button> 
   
         <div className="recipes">
           

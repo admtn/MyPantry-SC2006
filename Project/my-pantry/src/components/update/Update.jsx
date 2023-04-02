@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useRef, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   EmailAuthProvider,
@@ -31,7 +31,6 @@ const Update = () => {
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
       if (userRef.current) {
@@ -68,20 +67,16 @@ const Update = () => {
       const credential = EmailAuthProvider.credential(currentUser.email, pwd);
       await reauthenticateWithCredential(currentUser, credential);
   
-      // Save the current email to revert back in case of error
       const currentEmail = currentUser.email;
   
       try {
-        // Update the email and check for errors
         await updateEmail(currentUser, email);
   
-        // Send verification email after updating the email
         await sendEmailVerification(currentUser).then(() => {
           console.log("Email verification sent");
         });
       } catch (error) {
         if (error.code === "auth/email-already-in-use") {
-          // Revert email change if there's a duplicate email error
           await updateEmail(currentUser, currentEmail);
           alert("This email is already in use, please use another email.");
           return;
@@ -91,7 +86,6 @@ const Update = () => {
         }
       }
   
-      // Update the username if there's no duplicate email error
       await updateProfile(currentUser, {
         displayName: user,
       });
@@ -182,7 +176,7 @@ const Update = () => {
                 <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
               </label>
               <input
-                type={showPassword ? "text" : "password"}
+                type="password"
                 id="oldPassword"
                 onChange={(e) => setPwd(e.target.value)}
                 required
