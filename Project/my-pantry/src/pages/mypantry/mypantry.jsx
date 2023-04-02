@@ -8,24 +8,61 @@ import Checkbox from "../../components/checkbox/Checkbox";
 import InputBox from "../../components/inputbox/input";
 import { useNavigate } from "react-router-dom";
 import ShowIngredients from "./Ingredients"
+import { doc, setDoc } from "firebase/firestore";
+const db = require('../../firebase');
 
 const MyPantry = () => {
-  const apikey = '&apiKey=8b4379dc21bc4c1aa94cb4a62fdb130c'
+  const apikey = '&apiKey=7e512d08fbb14992a0d712854865b4eb'
   
 // 7e512d08fbb14992a0d712854865b4eb
 // 4da76519f82242caa825c7db58bdf9f1
 // 8b4379dc21bc4c1aa94cb4a62fdb130c
 
   const [Rec, setRec] = useState([])
-  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+apikey)
-
+  const [url,seturl] = useState('')
   const [RecInfo, setRecInfo] = useState([])
   const [RecipeInfoUrl,setRecipeInfoUrl] = useState('')
-
   const [value, setValue] = useState('');//search bar
+
+  useEffect( () => {
+    console.log("the new url is "+url)
+    fetch(url)
+    .then(response => response.json())
+    .then(json => setRec(json))
+  },[url],)
 
   function handleChange(event) {
     setValue(event.target.value);
+  }
+
+//   const addEntry = (id,img,titl) => {
+//     setDoc(doc(db, "recipes"), {
+//         id:id,
+//         image: img,
+//         title:titl
+//     });
+// }
+
+async function run() {
+  try {
+      await setDoc(doc(database, `path`), objData)
+  } catch (e) {
+      console.error(e); // handle your error here
+  } finally {
+      console.log('Cleanup here'); // cleanup, always executed
+  }
+}
+
+  const setalling = () => {
+    // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ShowIngredients.theArray.join(",+"))
+    ShowIngredients.getarray()
+  }
+
+  function setfetchnavigate(recipeid) {
+    // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
+    fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
+    .then(response => response.json())
+    .then(json => window.open(json.sourceUrl, "_blank"));
   }
 
   const buttonStyle2 = {
@@ -38,42 +75,17 @@ const MyPantry = () => {
     fontSize:20
   };
 
-  function setfetchnavigate(recipeid) {
-    // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
-    fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
-    .then(response => response.json())
-    .then(json => window.open(json.sourceUrl, "_blank"));
-  }
-
-    useEffect( () => {
-      fetch(url)
-      .then(response => response.json())
-      .then(json => setRec(json))
-    },[url],)
-
-
-  const setalling = () => {
-    // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ShowIngredients.theArray.join(",+"))
-    ShowIngredients.getarray()
-  }
-    // useEffect( () => {
-    //   fetch(RecipeInfoUrl)
-    //   .then(response => response.json())
-    //   .then(json => setRecInfo(json))
-    // },[RecipeInfoUrl])
-
-
   return (
     <div>
       <Navbar />
       <div style={{display:"flex", flexDirection:"row"}}>
         <div style ={{flex:1}}>
           <SidebarCopy/>
-          <div style={{borderWidth:1}}><ShowIngredients/></div>
+          <div style={{borderWidth:1}}><ShowIngredients seturl={seturl} url={url}/></div>
           
         </div>
         <div style ={{flex:4}}>
-        <button onClick={setalling} style={buttonStyle2}>Generate Recipe</button>
+        
           {/* <div>
               <label htmlFor="input-box">Enter ingredients:</label>
               <input
@@ -96,9 +108,12 @@ const MyPantry = () => {
               {/* <button style={{ width: "10px", height: "15px" }}></button> */}
               <span onClick={() => setfetchnavigate(item.id)}
               style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover",cursor:'pointer'}}>
-              <img src={item.image} />
+              <img style = {{margin:10}}src={item.image} />
               </span>
-              <Checkbox/>
+              <button onClick={
+                console.log("saved")
+                // addEntry(item.id,item.img,'cook my ass')
+              }>Save this recipe</button>
             </div>
           ))}
           </div>

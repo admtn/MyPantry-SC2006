@@ -4,8 +4,10 @@ import "./ingredients.scss";
 import { collection, getDocs,getFirestore, docs, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-const ShowIngredients = () => {
+const ShowIngredients = ({seturl,url}) => {
     const navigate = useNavigate();
+
+
 
     //to fetch from firestore
     const [ingredients, setIngredients] = useState([]);
@@ -19,10 +21,6 @@ const ShowIngredients = () => {
       }
     };
 
-    const getarray = () => {
-      // return theArray;
-      console.log(theArray)
-    };
 
     useEffect(() => {
         const fetchIngredients = async () => {
@@ -79,11 +77,18 @@ const ShowIngredients = () => {
             // <div style={{borderWidth:10,flexDirection:'row'}}>
             // <span style={{fontSize:30}}>{i} , </span>
             <button onClick={()=>{remove(index)}} style={buttonStyle}>{i}</button>
+            
             // </div>
           ))}
           </div>
 
           <button onClick={()=>{setTheArray([])}} style={buttonStyle2}>Clear</button>
+          <button onClick={()=>{
+            var temp = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='
+            theArray.map(t=>temp+=t+',+');
+            temp+='&number=3&apiKey=7e512d08fbb14992a0d712854865b4eb'
+            console.log(temp);
+            seturl(temp)}} style={buttonStyle2}>Generate Recipes</button>
           
           
 
