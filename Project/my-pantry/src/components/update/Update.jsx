@@ -13,7 +13,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./update.scss";
 
-const USER_REGEX = /^[A-z][A-z0-9]{3,19}$/;
+const USER_REGEX = /^[A-z][A-z]{3,19}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -144,7 +144,7 @@ const Update = () => {
               />
               <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                 <FontAwesomeIcon icon={faInfoCircle} />
-                Fullname should be 4 - 20 characters with no special character.
+                Fullname should be 4 - 20 characters with no numerical & special character.
               </p>
 
               <label htmlFor="email">
