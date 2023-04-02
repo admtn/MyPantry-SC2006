@@ -56,6 +56,7 @@ const MyPantry = () => {
         url: recipeUrl,
         image: recipeImage,
       });
+      alert("Recipe saved successfully!");
       console.log("Recipe saved successfully.");
     } catch (error) {
       console.error("Error saving recipe: ", error);
