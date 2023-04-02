@@ -53,11 +53,6 @@ async function run() {
   }
 }
 
-  const setalling = () => {
-    // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ShowIngredients.theArray.join(",+"))
-    ShowIngredients.getarray()
-  }
-
   function setfetchnavigate(recipeid) {
     // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
     fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
@@ -110,8 +105,7 @@ async function run() {
               style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover",cursor:'pointer'}}>
               <img style = {{margin:10}}src={item.image} />
               </span>
-              <button onClick={
-                console.log("saved")
+              <button onClick={()=>{console.log("saved")}
                 // addEntry(item.id,item.img,'cook my ass')
               }>Save this recipe</button>
             </div>
