@@ -63,7 +63,7 @@ const MyPantry = () => {
   };
 
   return (
-    <div>
+    <div className="mypantry">
       <Navbar />
       <div style={{display:"flex", flexDirection:"row"}}>
         <div style ={{flex:1}}>

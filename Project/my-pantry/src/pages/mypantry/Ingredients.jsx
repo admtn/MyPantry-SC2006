@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./mypantry.scss";
 import "./ingredients.scss";
-import { collection, getDocs,getFirestore, docs, doc } from "firebase/firestore";
+import { collection, getDocs,getFirestore, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { firestore } from '../../firebase';
 
 const ShowIngredients = ({seturl,url}) => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const ShowIngredients = ({seturl,url}) => {
 
     //to fetch from firestore
     const [ingredients, setIngredients] = useState([]);
+    const [pantry, setPantry] = useState([]);
     const [theArray, setTheArray] = useState([]);
     const remove = (index) => {
       if (index !== -1) {
@@ -30,9 +32,23 @@ const ShowIngredients = ({seturl,url}) => {
           const data = querySnapshot.docs.map((doc) => doc.data());
           setIngredients(data);
         };
-    
+
         fetchIngredients();
+        console.log(ingredients)
       }, []);
+
+    useEffect(() => {
+      const fetchPantry = async () => {
+        const db = getFirestore();
+        const querySnapshot = await getDocs(collection(db, "pantry")); 
+        //QuerySnapshot object contains an array of QueryDocumentSnapshot objects, each of which represents a single document in the collection or query results.
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        setPantry(data);
+        
+      };
+
+      fetchPantry();
+    }, []);
 
       //to toggle button
       const [isOn, setIsOn] = useState(false);
@@ -43,6 +59,18 @@ const ShowIngredients = ({seturl,url}) => {
       function handleChange(event) {
         setValue(event.target.value);
       }
+
+      const savetoPantry = async (name) => {
+        try {
+          const recipeRef = doc(firestore, "pantry");
+          await setDoc(recipeRef, {
+            name: name,
+          });
+          console.log("ingredient saved successfully.");
+        } catch (error) {
+          console.error("Error saving ingredient: ", error);
+        }
+      };
 
 
 
@@ -92,24 +120,22 @@ const ShowIngredients = ({seturl,url}) => {
           
           
 
-          {/* <div>
-            <label htmlFor="input-box">Enter ingredients:</label>
+          <div style={{margin:10}}>
+            <label style={{fontSize:25}} htmlFor="input-box">Enter ingredients:</label>
             <input
               type="text"
               id="input-box"
               value={value}
               onChange={handleChange}
+              style={{width: "300px", height: "50px", fontSize: "20px"}}
             />
-            <button onClick={()=>{
-              // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
-              navigate("/pantry")
-            }}>Search</button>
-          </div> */}
+            <button style={{fontSize:25,fontWeight: 'bold'}} onClick={()=>savetoPantry(value)}>Save ingredient to pantry</button>
+          </div>
 
         </div>
 
         <div>
-        {ingredients && ingredients.map((item,id) => (
+        {pantry && pantry.map((item,id) => (
           <button onClick={ () => {setTheArray(theArray => [...theArray, item.name])
             console.log(theArray)
           }
