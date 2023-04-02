@@ -2,7 +2,6 @@ import React from "react";
 import Update from "../../components/update/Update";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Rightbar from "../../components/rightbar/Rightbar";
 import "./profile.scss";
 
 const Profile = () => {
@@ -13,7 +12,6 @@ const Profile = () => {
         <div className="profileContainer">
           <Sidebar/>
           <Update />
-          <Rightbar />
         </div>
       </>
     </div>
