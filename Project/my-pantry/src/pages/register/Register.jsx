@@ -10,7 +10,7 @@ import {
   sendEmailVerification
 } from "firebase/auth";
 
-const USER_REGEX = /^[A-z][A-z0-9]{3,19}$/;
+const USER_REGEX = /^[A-z][A-z]{3,19}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
 
@@ -85,7 +85,6 @@ const Register = () => {
                 setAlertMsg("Account created successfully! Please check your email inbox for a verification email.");
               });
     
-              // Add a delay before navigating to the login page
               setTimeout(() => {
                 navigate("/login");
               }, 5000);
@@ -93,8 +92,14 @@ const Register = () => {
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {
               setErrMsg("This email is already in use, please use another email.");
+              setTimeout(() => {
+                setErrMsg("");
+            }, 5000);
             } else {
               setErrMsg("An error occurred. Please try again.");
+              setTimeout(() => {
+                setErrMsg("");
+            }, 5000);
             }
         }
     }
@@ -128,7 +133,7 @@ const Register = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Fullname should be 4 - 20 characters with no special character.
+                            Fullname should be 4 - 20 characters with no numerical & special character.
                         </p>
 
                         <label htmlFor="email">

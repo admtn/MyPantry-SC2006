@@ -1,11 +1,15 @@
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
 
-.item{
-    margin: 10px; //margin sets the distance between each .item element
-    
-    
+
+.mypantry{
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .item{
+        margin: 10px; //margin sets the distance between each .item element
+        
+        
+    }
+    flex: 6;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MartList from "../../components/martList/MartList";
+import martImg from "./martimg.png";
 import "./location.scss";
 
 const Location = () => {
@@ -36,6 +37,13 @@ const Location = () => {
         title: "Your location",
       });
 
+      const icon = {
+        url: martImg, // url
+        scaledSize: new window.google.maps.Size(95, 85), // scaled size
+        origin: new window.google.maps.Point(0,0), // origin
+        anchor: new window.google.maps.Point(0, 0) // anchor
+    };
+
       const service = new window.google.maps.places.PlacesService(map);
       service.nearbySearch(
         {
@@ -51,6 +59,7 @@ const Location = () => {
                 position: result.geometry.location,
                 map,
                 title: result.name,
+                icon: icon, 
               });
             });
           }
