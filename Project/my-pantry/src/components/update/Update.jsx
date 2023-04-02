@@ -1,151 +1,202 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
+import { useRef, useEffect } from "react";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   updateProfile,
   updateEmail,
+  sendEmailVerification,
 } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
-import { v4 as uuid } from "uuid";
-import { storage } from "../../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import "./update.scss";
 
+const USER_REGEX = /^[A-z][A-z0-9]{3,19}$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
 const Update = () => {
-  const [data, setData] = useState({
-    username: "",
-    newEmail: "",
-    oldPassword: "",
-  });
-  const [img, setImg] = useState(null);
+  const userRef = useRef();
+  
+    const [user, setUser] = useState('');
+    const [validName, setValidName] = useState(false);
+    const [userFocus, setUserFocus] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
+
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
+
+    useEffect(() => {
+      if (userRef.current) {
+        userRef.current.focus();
+      }
+    }, []);
+
+    useEffect(() => {
+        setValidName(USER_REGEX.test(user));
+    }, [user])
+
+    useEffect(() => {
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email])
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+    }, [pwd])
+
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
+  const isGoogleUser = currentUser.providerData.some((provider) => provider.providerId === "google.com");
+  
   const handleUpdate = async (e) => {
     e.preventDefault();
-
-    if (img) {
-      const storageRef = ref(storage, "usersImages/" + uuid());
-      const uploadTask = uploadBytesResumable(storageRef, img);
-
-      uploadTask.on(
-        (error) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateProfile(currentUser, {
-              photoURL: downloadURL,
-              displayName: data.username,
-            });
-
-            const credential = EmailAuthProvider.credential(
-              currentUser.email,
-              data.oldPassword
-            );
-
-            await reauthenticateWithCredential(currentUser, credential).then(
-              async () => {
-                // User re-authenticated.
-                await updateEmail(currentUser, data.newEmail);
-              }
-            );
-          });
-        }
-      );
-    } else {
-      await updateProfile(currentUser, {
-        displayName: data.username,
-      });
-      const credential = EmailAuthProvider.credential(
-        currentUser.email,
-        data.oldPassword
-      );
-
-      await reauthenticateWithCredential(currentUser, credential).then(
-        async () => {
-          // User re-authenticated.
-          await updateEmail(currentUser, data.newEmail);
-        }
-      );
+    const v1 = USER_REGEX.test(user);
+    const v2 = PWD_REGEX.test(pwd);
+    const v3 = EMAIL_REGEX.test(email);
+    if (!v1 || !v2 || !v3) {
+      return;
     }
-
-    navigate("/login");
+  
+    try {
+      const credential = EmailAuthProvider.credential(currentUser.email, pwd);
+      await reauthenticateWithCredential(currentUser, credential);
+  
+      const currentEmail = currentUser.email;
+  
+      try {
+        await updateEmail(currentUser, email);
+  
+        await sendEmailVerification(currentUser).then(() => {
+          console.log("Email verification sent");
+        });
+      } catch (error) {
+        if (error.code === "auth/email-already-in-use") {
+          await updateEmail(currentUser, currentEmail);
+          alert("This email is already in use, please use another email.");
+          return;
+        } else {
+          alert("An error occurred while updating the email. Please try again.");
+          return;
+        }
+      }
+  
+      await updateProfile(currentUser, {
+        displayName: user,
+      });
+  
+      alert(
+        "Account updated successfully! Please check your email inbox for a verification email."
+      );
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+      return;
+    }
   };
+  
+  
+
   // console.log(data);
   return (
     <div className="update">
       <div className="updateWrapper">
         <h3 className="updateTitle">Edit Your Account</h3>
+        <span>Fullname: {currentUser.displayName}</span>
         <span>Email Address: {currentUser.email}</span>
         <button type="submit" className="savedrecipesButton" onClick={()=>{navigate("/savedrecipes")}}>
               View your saved recipes here 
             </button>
         <div className="updateContainer">
-          <form onSubmit={handleUpdate}>
-            <div className="formItem">
-              <span>Profile Photo</span>
-              <div className="profilePic">
-                <img
-                  src={
-                    img
-                      ? URL.createObjectURL(img)
-                      : "/assets/DefaultProfile.png"
-                  }
-                  alt=""
-                  className="profileImg"
-                />
-                <label htmlFor="file">
-                  <span className="change">Change</span>
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  style={{ display: "none" }}
-                  onChange={(e) => setImg(e.target.files[0])}
-                />
-              </div>
+        {isGoogleUser ? (
+            <div className="googleUserWarning">
+              <p>
+                You are signed in with Google, and you cannot update your profile through this form.
+              </p>
             </div>
-            <div className="formItem">
-              <label>Fullname</label>
+          ) : (
+            <form onSubmit={handleUpdate}>
+              <label htmlFor="username">
+                Fullname
+                <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+              </label>
               <input
-                className="formInput"
                 type="text"
-                name="newFullname"
+                id="username"
+                ref={userRef}
                 placeholder={currentUser.displayName}
-                onChange={handleChange}
+                onChange={(e) => setUser(e.target.value)}
+                required
+                autoComplete="off"
+                value={user}
+                aria-invalid={validName ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)}
               />
-            </div>
-            <div className="formItem">
-              <label>Email</label>
+              <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Fullname should be 4 - 20 characters with no special character.
+              </p>
+
+              <label htmlFor="email">
+                Email Address
+                <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
+              </label>
               <input
-                className="formInput"
                 type="email"
-                name="newEmail"
+                id="newEmail"
                 placeholder={currentUser.email}
-                onChange={handleChange}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoComplete="off"
+                value={email}
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="emailnote"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
               />
-            </div>
-            <div className="formItem">
-              <label>Password</label>
+              <p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Email must be a valid email.
+              </p>
+
+              <label htmlFor="password">
+                Enter current password to save changes
+                <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
+              </label>
               <input
-                className="formInput"
-                name="oldPassword"
                 type="password"
-                onChange={handleChange}
+                id="oldPassword"
+                onChange={(e) => setPwd(e.target.value)}
+                required
+                aria-invalid={validPwd ? "false" : "true"}
+                aria-describedby="pwdnote"
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)}
               />
-            </div>
-            <button type="submit" className="updateButton">
-              Update Profile
-            </button>
-          </form>
+              <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                8 to 24 characters.<br />
+                Must include uppercase and lowercase letters, a number and a special character.<br />
+                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+              </p>
+              <button disabled={!validName || !validPwd ? true : false}>Update Profile</button>
+            </form>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
-export default Update;
+export default Update

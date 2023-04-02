@@ -11,7 +11,8 @@ import Register from './pages/register/Register';
 import MyPantry from './pages/mypantry/mypantry';
 import ShowIngredients from './pages/mypantry/Ingredients';
 import NearbyStore from './pages/nearbystore/NearbyStore';
-import SavedRecipes from './pages/viewsavedrecipes/ViewSavedRecipes';
+import ForgotPassword from './pages/forgotpassword/ForgotPassword';
+import SavedRecipes from './pages/savedRecipe/SavedRecipes';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -31,6 +32,10 @@ function App() {
       element: <Login />,
     },
     {
+      path: "/forgotpassword",
+      element: <ForgotPassword />,
+    },
+    {
       path: "/register",
       element: <Register />,
     },
@@ -39,6 +44,14 @@ function App() {
       element: (
           <AuthRoute>
           <Profile />
+          </AuthRoute>
+      ),
+    },
+    {
+      path: "/savedrecipes", //to profile
+      element: (
+          <AuthRoute>
+          <SavedRecipes />
           </AuthRoute>
       ),
     },
@@ -55,14 +68,6 @@ function App() {
       element: (
         <AuthRoute>
         <NearbyStore />,
-        </AuthRoute>
-      ),
-    },
-    {
-      path: "/savedrecipes",
-      element: (
-        <AuthRoute>
-        <SavedRecipes />,
         </AuthRoute>
       ),
     },
