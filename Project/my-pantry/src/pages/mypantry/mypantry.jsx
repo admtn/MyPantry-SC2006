@@ -57,7 +57,7 @@ async function run() {
     // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
     fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
     .then(response => response.json())
-    .then(json => window.open(json.sourceUrl, "_blank"));
+    .then(json => window.open(json.spoonacularSourceUrl, "_blank"));
   }
 
   const buttonStyle2 = {
