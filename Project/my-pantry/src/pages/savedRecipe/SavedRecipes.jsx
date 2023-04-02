@@ -21,6 +21,13 @@ import { useNavigate } from "react-router-dom";
       url: ""
       
     })
+    const apikey = '&apiKey=7e512d08fbb14992a0d712854865b4eb'
+
+    function setfetchnavigate(recipeid) {
+      fetch('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey)
+      .then(response => response.json())
+      .then(json => window.open(json.spoonacularSourceUrl, "_blank"));
+    }
     const [popupActive, setPopupActive] = useState(false)
   
     const recipesCollectionRef = collection(db, "recipes")
@@ -60,12 +67,9 @@ import { useNavigate } from "react-router-dom";
 
   
              <div>
-             { <a href= {recipe.url} target="_blank" rel="noreferrer">                
-                 <img src={recipe.image} 
-                 
-                 />
-                 </a> }
-
+              <span style ={{cursor:'pointer'}}onClick={() => setfetchnavigate(recipe.id)}>
+                <img src={recipe.image}/>
+              </span>
               </div>
   
               <div className="buttons">
