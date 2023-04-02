@@ -73,7 +73,7 @@ import { useNavigate } from "react-router-dom";
               </div>
   
               <div className="buttons">
-                <button className="remove" onClick={() => removeRecipe(recipe.id)}>Remove</button>
+                <button className="remove" onClick={() => removeRecipe(recipe.id.toString())}>Remove</button>
               </div> 
             </div>
           ))}
