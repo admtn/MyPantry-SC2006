@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+import SidebarCopy from "../../components/sidebar/Sidebar copy";
 import Navbar from "../../components/navbar/Navbar";
 import "./mypantry.scss";
 import SearchBar from "../../components/Searchbar";
@@ -16,7 +17,7 @@ const MyPantry = () => {
 // 8b4379dc21bc4c1aa94cb4a62fdb130c
 
   const [Rec, setRec] = useState([])
-  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=1'+apikey)
+  const [url,seturl] = useState('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+apikey)
 
   const [RecInfo, setRecInfo] = useState([])
   const [RecipeInfoUrl,setRecipeInfoUrl] = useState('')
@@ -26,6 +27,16 @@ const MyPantry = () => {
   function handleChange(event) {
     setValue(event.target.value);
   }
+
+  const buttonStyle2 = {
+    color: 'black',
+    borderRadius: '5px',
+    // border: 'none',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    margin: 10,
+    fontSize:20
+  };
 
   function setfetchnavigate(recipeid) {
     // setRecipeInfoUrl('https://api.spoonacular.com/recipes/' + recipeid.toString() + '/information?includeNutrition=false' + apikey);
@@ -41,8 +52,9 @@ const MyPantry = () => {
     },[url],)
 
 
-  function setalling() {
-    seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+theArray.join(",+"))
+  const setalling = () => {
+    // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+ShowIngredients.theArray.join(",+"))
+    ShowIngredients.getarray()
   }
     // useEffect( () => {
     //   fetch(RecipeInfoUrl)
@@ -55,10 +67,14 @@ const MyPantry = () => {
     <div>
       <Navbar />
       <div style={{display:"flex", flexDirection:"row"}}>
-        <div style ={{flex:2}}>
-          <Sidebar/><ShowIngredients/></div>
+        <div style ={{flex:1}}>
+          <SidebarCopy/>
+          <div style={{borderWidth:1}}><ShowIngredients/></div>
+          
+        </div>
         <div style ={{flex:4}}>
-          <div>
+        <button onClick={setalling} style={buttonStyle2}>Generate Recipe</button>
+          {/* <div>
               <label htmlFor="input-box">Enter ingredients:</label>
               <input
                 type="text"
@@ -72,7 +88,7 @@ const MyPantry = () => {
                 console.log(url)
                 // navigate("/ingredients")
               }}>Search</button>
-          </div>
+          </div> */}
           <div className="container">
           {Rec && Rec.map((item,index) =>(
             <div className ="item">

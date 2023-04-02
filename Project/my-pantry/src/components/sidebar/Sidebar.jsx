@@ -10,7 +10,7 @@ import {
   import "./sidebar.scss";
   import { useNavigate } from "react-router-dom";
   
-  const Sidebar = () => {
+  const SidebarCopy = () => {
     const { dispatch } = useContext(AuthContext);
     const navigate = useNavigate();
   
@@ -44,4 +44,4 @@ import {
     );
   };
 
-export default Sidebar;
+export default SidebarCopy;

@@ -19,6 +19,11 @@ const ShowIngredients = () => {
       }
     };
 
+    const getarray = () => {
+      // return theArray;
+      console.log(theArray)
+    };
+
     useEffect(() => {
         const fetchIngredients = async () => {
           const db = getFirestore();
@@ -48,10 +53,21 @@ const ShowIngredients = () => {
       //button styling
       const buttonStyle = {
         color: 'black',
-        padding: '10px 20px',
+        // padding: '10px 20px',
         borderRadius: '5px',
         // border: 'none',
         cursor: 'pointer',
+        margin: 10,
+        fontSize:22
+      };
+
+      //button styling
+      const buttonStyle2 = {
+        color: 'black',
+        borderRadius: '5px',
+        // border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
         margin: 10,
         fontSize:20
       };
@@ -67,10 +83,11 @@ const ShowIngredients = () => {
           ))}
           </div>
 
-          <button onClick={()=>{setTheArray([])}} style={buttonStyle}>clear</button>
+          <button onClick={()=>{setTheArray([])}} style={buttonStyle2}>Clear</button>
+          
           
 
-          <div>
+          {/* <div>
             <label htmlFor="input-box">Enter ingredients:</label>
             <input
               type="text"
@@ -82,7 +99,7 @@ const ShowIngredients = () => {
               // seturl('https://api.spoonacular.com/recipes/findByIngredients?ingredients=+apples,+flour,+sugar,&number=2'+value)
               navigate("/pantry")
             }}>Search</button>
-          </div>
+          </div> */}
 
         </div>
 
@@ -91,7 +108,7 @@ const ShowIngredients = () => {
           <button onClick={ () => {setTheArray(theArray => [...theArray, item.name])
             console.log(theArray)
           }
-          }><span style={isOn?buttonStyle:{fontSize:30}}>{item.name}</span></button>
+          }><span style={isOn?buttonStyle:{fontSize:20}}>{item.name}</span></button>
           // <button><span style={{fontSize:30}}>{item.name}</span></button>\
         ))}
         
