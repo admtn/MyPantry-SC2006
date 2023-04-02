@@ -119,7 +119,7 @@ const ShowIngredients = ({seturl,url}) => {
         
         </div>
     </div> 
-  );w
+  );
 };
 
 export default ShowIngredients;
