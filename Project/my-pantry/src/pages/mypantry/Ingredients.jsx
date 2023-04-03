@@ -9,16 +9,10 @@ import List from "./List";
 import Searchbar from "./Searchbar";
 
 const ShowIngredients = ({seturl,url}) => {
-    const navigate = useNavigate();
 
-    const [inputText, setInputText] = useState("");
-    let inputHandler = (e) => {
-      //convert input text to lower case
-      var lowerCase = e.target.value.toLowerCase();
-      setInputText(lowerCase);
-    };
     //to fetch from firestore
     const [ingredients, setIngredients] = useState([]);
+    const [buttonsClicked, setbuttonsClicked] = useState([]);
     const [pantry, setPantry] = useState([]);
     const [theArray, setTheArray] = useState([]);
     const remove = (index) => {
@@ -30,6 +24,10 @@ const ShowIngredients = ({seturl,url}) => {
       }
     };
 
+    const remove2 = (name) => {
+      const i = theArray.indexOf(name)
+      remove(i)
+    };
 
     useEffect(() => {
         const fetchIngredients = async () => {
@@ -44,19 +42,6 @@ const ShowIngredients = ({seturl,url}) => {
         console.log(ingredients)
       }, []);
 
-    // useEffect(() => {
-    //   const fetchPantry = async () => {
-    //     const db = getFirestore();
-    //     const querySnapshot = await getDocs(collection(db, "pantry")); 
-    //     //QuerySnapshot object contains an array of QueryDocumentSnapshot objects, each of which represents a single document in the collection or query results.
-    //     const data = querySnapshot.docs.map((doc) => doc.data());
-    //     setPantry(data);
-        
-    //   };
-
-    //   fetchPantry();
-    // }, []);
-
     useEffect(() => {
       const fetchPantry = () => {
         const db = getFirestore();
@@ -70,7 +55,7 @@ const ShowIngredients = ({seturl,url}) => {
         return unsubscribe;
       };
     
-      const unsubscribe = fetchPantry();
+    const unsubscribe = fetchPantry();
       return () => {
         unsubscribe();
       };
@@ -88,11 +73,6 @@ const ShowIngredients = ({seturl,url}) => {
         isOn?setButtonText('Delete'):setButtonText('Deleting from pantry')
       };
       const [buttonText, setButtonText] = useState('Delete');
-
-
-
-
-      const [value, setValue] = useState('');//search bar
 
       //button styling
       const buttonStyle = {
@@ -122,11 +102,11 @@ const ShowIngredients = ({seturl,url}) => {
         <div>
         <h1 style={{marginLeft:20}}>Ingredients to use</h1>
           <div style={{marginLeft:8}}>{theArray && theArray.map((i,index)=>(
-            // <div style={{borderWidth:10,flexDirection:'row'}}>
-            // <span style={{fontSize:30}}>{i} , </span>
-            <button onClick={()=>{remove(index)}}>{i}</button>
+            <button onClick={()=>{
+              remove(index) //remove button
+              // removeButton(index)
+            }}>{i}</button>
             
-            // </div>
           ))}
           </div>
 
@@ -145,9 +125,19 @@ const ShowIngredients = ({seturl,url}) => {
         <div style={{marginLeft:8}}>
         <h1 style={{marginLeft:40}}>My Pantry</h1>
         {pantry && pantry.map((item,id) => (
-          <button onClick={ isOn?
+          <button style = {theArray.includes(item.name)?buttonStyle:buttonStyle2} key={id} onClick={ isOn?
           ()=>{removePantry(item.id.toString()  )}
-          :() => {setTheArray(theArray => [...theArray, item.name])}
+          :() => {
+            if(theArray.includes(item.name)){
+              console.log("remove it nwo!!")
+              remove2(item.name)
+            }
+            else{
+              setTheArray(theArray => [...theArray, item.name])
+              console.log(theArray)
+            }
+            
+          }
           }>{item.name}</button>
           // <button><span style={{fontSize:30}}>{item.name}</span></button>\
         ))}
