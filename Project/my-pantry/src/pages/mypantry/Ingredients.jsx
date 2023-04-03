@@ -96,13 +96,14 @@ const ShowIngredients = ({seturl,url}) => {
 
       //button styling
       const buttonStyle = {
-        color: 'black',
-        // padding: '10px 20px',
+        color: 'white',
         borderRadius: '5px',
+        backgroundColor: 'grey',
         // border: 'none',
         cursor: 'pointer',
+        fontWeight: 'bold',
         margin: 10,
-        fontSize:22
+        fontSize:20
       };
 
       //button styling
@@ -136,7 +137,7 @@ const ShowIngredients = ({seturl,url}) => {
             temp+='&number=3&apiKey=7e512d08fbb14992a0d712854865b4eb'
             console.log(temp);
             seturl(temp)}} style={buttonStyle2}>Generate Recipes</button>
-          <button style = {buttonStyle2} onClick={handleToggle}>
+          <button style = {isOn?buttonStyle:buttonStyle2} onClick={handleToggle}>
             {buttonText}
           </button>
         </div>
