@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import MartList from "../../components/martList/MartList";
 import martImg from "./martimg.png";
 import "./location.scss";
+import TextField from "@mui/material/TextField";
 
 const Location = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [supermarkets, setSupermarkets] = useState([]);
+  const [radius, setRadius] = useState(1500);
+  const [inputText, setInputText] = useState("");
+
+
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    setInputText(e.target.value);
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -47,7 +56,7 @@ const Location = () => {
       service.nearbySearch(
         {
           location: { lat: latitude, lng: longitude },
-          radius: 1500, // search within 1.5km
+          radius: radius, // search within 1.5km
           type: "supermarket",
         },
         (results, status) => {
@@ -69,6 +78,24 @@ const Location = () => {
 
   return (
     <div className="loc">
+        <div className="search">
+        <TextField
+          id="outlined-basic"
+          onChange={inputHandler}
+          variant="outlined"
+          fullWidth
+          label="Set Radius"
+          onKeyDown={(ev) => {
+            console.log(`Pressed keyCode ${ev.key}`);
+            if (ev.key === 'Enter') {
+              // Do code here
+              setRadius(parseInt(inputText));
+              console.log(radius)
+              ev.preventDefault();
+            }
+          }}
+        />
+      </div>
       {latitude && longitude ? (
         <>
           <h1>Supermarkets Near Me</h1>
