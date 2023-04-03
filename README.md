@@ -55,11 +55,12 @@ Click here -> [MyPantry](https://github.com/admtn/MyPantry-SC2006/tree/main/Proj
   - deleteDoc
 
 ## Environment Set-Up
-Step 1: Install nodeJS from <https://nodejs.org/en/download>
-Step 2: Install vscode ide from <https://code.visualstudio.com/download>
-Step 3: Install 4 extensions on Visual Studio code
+Steps:
+1. Install nodeJS from <https://nodejs.org/en/download>
+2. Install vscode ide from <https://code.visualstudio.com/download>
+3. Install 4 extensions on Visual Studio code
 ![image](https://user-images.githubusercontent.com/104296815/229593528-05a87487-8ae3-4213-ae3d-75ac4b878a67.png)
-Step 4: Run 3 commands in Visual Studio IDE terminal
+4. Run 3 commands in Visual Studio IDE terminal
 ![image](https://user-images.githubusercontent.com/104296815/229594207-83045cba-baf9-4a13-b3a2-3babed9916e7.png)
-Step 5: Our app is running
+5. Our app is running
 
