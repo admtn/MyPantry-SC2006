@@ -78,7 +78,7 @@ const ShowIngredients = ({seturl,url}) => {
       const buttonStyle = {
         color: 'white',
         borderRadius: '5px',
-        backgroundColor: 'grey',
+        backgroundColor: 'rgb(151, 48, 48)',
         // border: 'none',
         cursor: 'pointer',
         fontWeight: 'bold',
