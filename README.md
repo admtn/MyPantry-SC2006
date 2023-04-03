@@ -5,7 +5,7 @@
 This is a Software-Engineering Project for SC2006 
 For detailed walkthrough, please view the source code in order from:
 
-1. [MyPantry]()
+Click here -> [MyPantry]()
   
 ## Contributors
 
