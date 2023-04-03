@@ -4,6 +4,7 @@ import martImg from "./martimg.png";
 import "./location.scss";
 import TextField from "@mui/material/TextField";
 
+
 const Location = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -74,7 +75,7 @@ const Location = () => {
         }
       );
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude,radius]);
 
   return (
     <div className="loc">
@@ -89,9 +90,15 @@ const Location = () => {
             console.log(`Pressed keyCode ${ev.key}`);
             if (ev.key === 'Enter') {
               // Do code here
-              setRadius(parseInt(inputText));
-              console.log(radius)
-              ev.preventDefault();
+              if(!isNaN(+inputText)){
+                setRadius(parseInt(inputText));
+                console.log(radius)
+                ev.preventDefault();
+              }
+              else{
+                alert("Input a valid number!");
+                ev.preventDefault();
+              }
             }
           }}
         />

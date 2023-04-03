@@ -13,7 +13,6 @@ const NearbyStore = () => {
           <Sidebar />
           <Location />
         </div>
-        <div>hello</div>
       </>
     </div>
   );
