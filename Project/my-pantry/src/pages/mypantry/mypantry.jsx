@@ -87,7 +87,7 @@ const MyPantry = () => {
                   {item.usedIngredients && item.usedIngredients.map((missedObj)=>(
                     <li>{missedObj.originalName}</li>
                   ))}
-                  <h3>Unsed ingredients</h3>
+                  <h3>Unused ingredients</h3>
                   {item.unusedIngredients && item.unusedIngredients.map((missedObj)=>(
                     <li>{missedObj.originalName}</li>
                   ))}
