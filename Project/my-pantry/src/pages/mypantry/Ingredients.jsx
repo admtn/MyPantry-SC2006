@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./mypantry.scss";
 import "./ingredients.scss";
-import { collection, getDocs,getFirestore, setDoc, doc, onSnapshot} from "firebase/firestore";
+import { collection, getDocs,getFirestore, deleteDoc, doc, onSnapshot} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firestore } from '../../firebase';
 import TextField from "@mui/material/TextField";
@@ -76,18 +76,20 @@ const ShowIngredients = ({seturl,url}) => {
       };
     }, []);
 
+    const removePantry = id => {
+      const db = getFirestore();
+      deleteDoc(doc(db, "pantry", id))
+    }
+
       //to toggle button
       const [isOn, setIsOn] = useState(false);
-      // const handleToggle = () => {
-      //   setIsOn(!isOn);
-      //   setButtonText('Deleting from pantry');
-      // };
-      // const [buttonText, setButtonText] = useState('Delete');
+      const handleToggle = () => {
+        setIsOn(!isOn);
+        isOn?setButtonText('Delete'):setButtonText('Deleting from pantry')
+      };
+      const [buttonText, setButtonText] = useState('Delete');
 
 
-      function handleChange(event) {
-        setValue(event.target.value);
-      }
 
 
       const [value, setValue] = useState('');//search bar
@@ -117,6 +119,7 @@ const ShowIngredients = ({seturl,url}) => {
   return (
     <div>
         <div>
+        <h1 style={{marginLeft:35}}>Ingredients to use</h1>
           <div>{theArray && theArray.map((i,index)=>(
             // <div style={{borderWidth:10,flexDirection:'row'}}>
             // <span style={{fontSize:30}}>{i} , </span>
@@ -133,15 +136,16 @@ const ShowIngredients = ({seturl,url}) => {
             temp+='&number=3&apiKey=7e512d08fbb14992a0d712854865b4eb'
             console.log(temp);
             seturl(temp)}} style={buttonStyle2}>Generate Recipes</button>
-          {/* <button style = {buttonStyle2} onClick={()=>{handleToggle}}>
-             {buttonText}
-             </button> */}
+          <button style = {buttonStyle2} onClick={handleToggle}>
+            {buttonText}
+          </button>
         </div>
 
         <div>
+        <h1 style={{marginLeft:40}}>My Pantry</h1>
         {pantry && pantry.map((item,id) => (
           <button onClick={ isOn?
-          ()=>{console.log('cibai')}
+          ()=>{removePantry(item.id.toString()  )}
           :() => {setTheArray(theArray => [...theArray, item.name])}
           }>{item.name}</button>
           // <button><span style={{fontSize:30}}>{item.name}</span></button>\

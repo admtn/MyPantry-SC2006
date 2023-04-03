@@ -30,7 +30,6 @@ function List(props) {
             id: id,
             name: name
             });
-            alert("Ingredient saved successfully!");
             console.log("Ingredient saved successfully.");
         } catch (error) {
             console.error("Error saving Ingredient: ", error);
