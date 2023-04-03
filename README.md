@@ -49,10 +49,10 @@ Click here -> [MyPantry](https://github.com/admtn/MyPantry-SC2006/tree/main/Proj
 5. Google Map API
 6. Google Places API
 7. Firestore API methods
-  7.1 onSnapshot
-  7.2 getDocs
-  7.3 getFirestore
-  7.4 deleteDoc
+  - onSnapshot
+  - getDocs
+  - getFirestore
+  - deleteDoc
 
 ## Environment Set-Up
 1.
