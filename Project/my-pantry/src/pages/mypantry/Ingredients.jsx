@@ -135,7 +135,7 @@ const ShowIngredients = ({seturl,url}) => {
           <button onClick={()=>{
             var temp = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='
             theArray.map(t=>temp+=t+',+');
-            temp+='&number=3&apiKey=7e512d08fbb14992a0d712854865b4eb'
+            temp+='&apiKey=7e512d08fbb14992a0d712854865b4eb'
             console.log(temp);
             seturl(temp)}} style={buttonStyle2}>Generate Recipes</button>
           <button style = {isOn?buttonStyle:buttonStyle2} onClick={handleToggle}>

@@ -77,14 +77,28 @@ const MyPantry = () => {
             <div className="container">
             {Rec && Rec.map((item) =>(
               <div className ="item">
-                <h5 style={{ maxWidth: '150px', margin:'30px' }}>{item.title}</h5>             
+                <h2 style={{ maxWidth: '150px', margin:'30px' }}>{item.title}</h2>             
                 <span onClick={() => setfetchnavigate(item.id)}
                 style={{display:"flex",justifyContent:"centre",width: "150px", height: "150px", objectFit: "cover",cursor:'pointer'}}>
                 <img style = {{margin:10}}src={item.image} />
                 </span>
-                <button onClick={() => saveRecipe(item.id, item.title,`https://api.spoonacular.com/recipes/${item.id}/information?includeNutrition=false&apiKey=7e512d08fbb14992a0d712854865b4eb`, item.image)}>
-              Save this recipe
-            </button>
+                <span>
+                  <h3>Used ingredients</h3>
+                  {item.usedIngredients && item.usedIngredients.map((missedObj)=>(
+                    <li>{missedObj.originalName}</li>
+                  ))}
+                  <h3>Unsed ingredients</h3>
+                  {item.unusedIngredients && item.unusedIngredients.map((missedObj)=>(
+                    <li>{missedObj.originalName}</li>
+                  ))}
+                  <h3>Missing ingredients</h3>
+                  {item.missedIngredients && item.missedIngredients.map((missedObj)=>(
+                    <li>{missedObj.originalName}</li>
+                  ))}
+                </span>
+                <button style ={{fontSize:25,borderRadius:10, backgroundColor:'rgb(212, 135, 18)', cursor: 'pointer'}}onClick={() => saveRecipe(item.id, item.title,`https://api.spoonacular.com/recipes/${item.id}/information?includeNutrition=false&apiKey=7e512d08fbb14992a0d712854865b4eb`, item.image)}>
+                  Save this recipe
+                </button>
             </div>
         ))}
         </div>
