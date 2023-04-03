@@ -96,6 +96,27 @@ const ShowIngredients = ({seturl,url}) => {
         margin: 10,
         fontSize:20
       };
+
+      const ing = {
+        color: 'black',
+        borderRadius: '3px',
+        // border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        margin: 5,
+        fontSize:20
+      };
+
+      const ing2 = {
+        color: 'white',
+        borderRadius: '3px',
+        backgroundColor: 'grey',
+        // border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        margin: 5,
+        fontSize:20
+      };
     
   return (
     <div>
@@ -125,7 +146,7 @@ const ShowIngredients = ({seturl,url}) => {
         <div style={{marginLeft:8}}>
         <h1 style={{marginLeft:40}}>My Pantry</h1>
         {pantry && pantry.map((item,id) => (
-          <button style = {theArray.includes(item.name)?buttonStyle:buttonStyle2} key={id} onClick={ isOn?
+          <button style = {theArray.includes(item.name)?ing2:ing} key={id} onClick={ isOn?
           ()=>{removePantry(item.id.toString()  )}
           :() => {
             if(theArray.includes(item.name)){
