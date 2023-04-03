@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./mypantry.scss";
 import "./ingredients.scss";
-import { collection, getDocs,getFirestore, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs,getFirestore, setDoc, doc, onSnapshot} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { firestore } from '../../firebase';
+import TextField from "@mui/material/TextField";
+import List from "./List";
+import Searchbar from "./Searchbar";
 
 const ShowIngredients = ({seturl,url}) => {
     const navigate = useNavigate();
 
-
-
+    const [inputText, setInputText] = useState("");
+    let inputHandler = (e) => {
+      //convert input text to lower case
+      var lowerCase = e.target.value.toLowerCase();
+      setInputText(lowerCase);
+    };
     //to fetch from firestore
     const [ingredients, setIngredients] = useState([]);
     const [pantry, setPantry] = useState([]);
@@ -37,41 +44,50 @@ const ShowIngredients = ({seturl,url}) => {
         console.log(ingredients)
       }, []);
 
-    useEffect(() => {
-      const fetchPantry = async () => {
-        const db = getFirestore();
-        const querySnapshot = await getDocs(collection(db, "pantry")); 
-        //QuerySnapshot object contains an array of QueryDocumentSnapshot objects, each of which represents a single document in the collection or query results.
-        const data = querySnapshot.docs.map((doc) => doc.data());
-        setPantry(data);
+    // useEffect(() => {
+    //   const fetchPantry = async () => {
+    //     const db = getFirestore();
+    //     const querySnapshot = await getDocs(collection(db, "pantry")); 
+    //     //QuerySnapshot object contains an array of QueryDocumentSnapshot objects, each of which represents a single document in the collection or query results.
+    //     const data = querySnapshot.docs.map((doc) => doc.data());
+    //     setPantry(data);
         
-      };
+    //   };
 
-      fetchPantry();
+    //   fetchPantry();
+    // }, []);
+
+    useEffect(() => {
+      const fetchPantry = () => {
+        const db = getFirestore();
+        const pantryCollection = collection(db, "pantry");
+    
+        const unsubscribe = onSnapshot(pantryCollection, (querySnapshot) => {
+          const data = querySnapshot.docs.map((doc) => doc.data());
+          setPantry(data);
+        });
+    
+        return unsubscribe;
+      };
+    
+      const unsubscribe = fetchPantry();
+      return () => {
+        unsubscribe();
+      };
     }, []);
 
       //to toggle button
       const [isOn, setIsOn] = useState(false);
-      const handleToggle = () => {
-        setIsOn(!isOn);
-      };
+      // const handleToggle = () => {
+      //   setIsOn(!isOn);
+      //   setButtonText('Deleting from pantry');
+      // };
+      // const [buttonText, setButtonText] = useState('Delete');
+
 
       function handleChange(event) {
         setValue(event.target.value);
       }
-
-      const savetoPantry = async (name) => {
-        try {
-          const recipeRef = doc(firestore, "pantry");
-          await setDoc(recipeRef, {
-            name: name,
-          });
-          console.log("ingredient saved successfully.");
-        } catch (error) {
-          console.error("Error saving ingredient: ", error);
-        }
-      };
-
 
 
       const [value, setValue] = useState('');//search bar
@@ -117,29 +133,17 @@ const ShowIngredients = ({seturl,url}) => {
             temp+='&number=3&apiKey=7e512d08fbb14992a0d712854865b4eb'
             console.log(temp);
             seturl(temp)}} style={buttonStyle2}>Generate Recipes</button>
-          
-          
-
-          <div style={{margin:10}}>
-            <label style={{fontSize:25}} htmlFor="input-box">Enter ingredients:</label>
-            <input
-              type="text"
-              id="input-box"
-              value={value}
-              onChange={handleChange}
-              style={{width: "300px", height: "50px", fontSize: "20px"}}
-            />
-            <button style={{fontSize:25,fontWeight: 'bold'}} onClick={()=>savetoPantry(value)}>Save ingredient to pantry</button>
-          </div>
-
+          {/* <button style = {buttonStyle2} onClick={()=>{handleToggle}}>
+             {buttonText}
+             </button> */}
         </div>
 
         <div>
         {pantry && pantry.map((item,id) => (
-          <button onClick={ () => {setTheArray(theArray => [...theArray, item.name])
-            console.log(theArray)
-          }
-          }><span style={isOn?buttonStyle:{fontSize:20}}>{item.name}</span></button>
+          <button onClick={ isOn?
+          ()=>{console.log('cibai')}
+          :() => {setTheArray(theArray => [...theArray, item.name])}
+          }>{item.name}</button>
           // <button><span style={{fontSize:30}}>{item.name}</span></button>\
         ))}
         
