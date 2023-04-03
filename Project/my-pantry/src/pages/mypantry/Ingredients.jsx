@@ -119,11 +119,11 @@ const ShowIngredients = ({seturl,url}) => {
   return (
     <div>
         <div>
-        <h1 style={{marginLeft:35}}>Ingredients to use</h1>
-          <div>{theArray && theArray.map((i,index)=>(
+        <h1 style={{marginLeft:20}}>Ingredients to use</h1>
+          <div style={{marginLeft:8}}>{theArray && theArray.map((i,index)=>(
             // <div style={{borderWidth:10,flexDirection:'row'}}>
             // <span style={{fontSize:30}}>{i} , </span>
-            <button onClick={()=>{remove(index)}} style={buttonStyle}>{i}</button>
+            <button onClick={()=>{remove(index)}}>{i}</button>
             
             // </div>
           ))}
@@ -141,7 +141,7 @@ const ShowIngredients = ({seturl,url}) => {
           </button>
         </div>
 
-        <div>
+        <div style={{marginLeft:8}}>
         <h1 style={{marginLeft:40}}>My Pantry</h1>
         {pantry && pantry.map((item,id) => (
           <button onClick={ isOn?
