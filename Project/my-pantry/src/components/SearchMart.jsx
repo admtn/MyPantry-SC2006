@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import TextField from "@mui/material/TextField";
-import Location from "../components/location/Location";
 import "./searchmart.scss";
 
 const SearchMart = () => {
@@ -13,7 +12,6 @@ const SearchMart = () => {
 
   return (
     <div className="main">
-      <h1>Search</h1>
       <div className="search">
         <TextField
           id="outlined-basic"
@@ -23,8 +21,6 @@ const SearchMart = () => {
           label="Enter a location"
         />
       </div>
-      {/* <Location input={inputText} /> */}
-      <Location />
     </div>
   );
 }
