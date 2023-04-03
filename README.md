@@ -49,19 +49,18 @@ Click here -> [MyPantry](https://github.com/admtn/MyPantry-SC2006/tree/main/Proj
 5. Google Map API
 6. Google Places API
 7. Firestore API methods
-  7.1 onSnapshot
-  7.2 getDocs
-  7.3 getFirestore
-  7.4 deleteDoc
+  - onSnapshot
+  - getDocs
+  - getFirestore
+  - deleteDoc
 
 ## Environment Set-Up
-1.
-2.
-3.
-4.
-5.
+Steps:
+1. Install nodeJS from <https://nodejs.org/en/download>
+2. Install vscode ide from <https://code.visualstudio.com/download>
+3. Install 4 extensions on Visual Studio code
+![image](https://user-images.githubusercontent.com/104296815/229593528-05a87487-8ae3-4213-ae3d-75ac4b878a67.png)
+4. Run 3 commands in Visual Studio IDE terminal
+![image](https://user-images.githubusercontent.com/104296815/229594207-83045cba-baf9-4a13-b3a2-3babed9916e7.png)
+5. Our app is running
 
-## References
-- <>
-- <>
-- <>
