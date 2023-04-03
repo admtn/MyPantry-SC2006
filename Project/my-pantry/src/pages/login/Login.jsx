@@ -65,7 +65,7 @@ const Login = () => {
         console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/");
+        navigate("/pantry");
       })
       .catch((error) => {
         dispatch({ type: "LOGIN_FAILURE" });
