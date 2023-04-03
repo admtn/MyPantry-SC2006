@@ -5,7 +5,7 @@
 This is a Software-Engineering Project for SC2006 
 For detailed walkthrough, please view the source code in order from:
 
-Click here -> [MyPantry]()
+Click here -> [MyPantry](https://github.com/admtn/MyPantry-SC2006/tree/main/Project/my-pantry)
   
 ## Contributors
 
@@ -48,7 +48,7 @@ Click here -> [MyPantry]()
 4. Spoonacular search recipe by ingredients API 
 5. Google Map API
 6. Google Places API
-7.Firestore API methods
+7. Firestore API methods
   7.1 onSnapshot
   7.2 getDocs
   7.3 getFirestore
@@ -62,7 +62,6 @@ Click here -> [MyPantry]()
 5.
 
 ## References
-
 - <>
 - <>
 - <>
