@@ -39,16 +39,15 @@ const Location = () => {
 
       const icon = {
         url: martImg, // url
-        scaledSize: new window.google.maps.Size(95, 85), // scaled size
-        origin: new window.google.maps.Point(0,0), // origin
-        anchor: new window.google.maps.Point(0, 0) // anchor
+        scaledSize: new window.google.maps.Size(30, 40), // scaled size
+        origin: new window.google.maps.Point(0, 0), // origin
     };
 
       const service = new window.google.maps.places.PlacesService(map);
       service.nearbySearch(
         {
           location: { lat: latitude, lng: longitude },
-          radius: 1000, // search within 1km
+          radius: 1500, // search within 1.5km
           type: "supermarket",
         },
         (results, status) => {
