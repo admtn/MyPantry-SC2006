@@ -35,11 +35,42 @@ Click here -> [MyPantry](https://github.com/admtn/MyPantry-SC2006/tree/main/Proj
 6. Edit User Profile.
 
 
-## Technologies Used
+## Tech Stack
 
-1. ReactJS
-2. Firebase
-3. Google Cloud
+1. **ReactJs** - Frontend development
+2. **Firebase** - Mackend development
+   - Firebase Authentication
+   - Firebase Firestore
+   - Firebase Realtime Database
+   - Firebase Cloud Storage
+3. **Google Maps API** - Location services
+4. **JavaScript**
+
+## Prerequisites
+
+1. **Node.js** - Download and install [Node.js]
+2. **VSCode** - Download and install [VScode] on your Windows to start a live development server.
+
+## Usage
+
+1. Clone the repo
+
+   ```bash
+   git clone https://github.com/admtn/MyPantry-SC2006.git
+   ```
+
+2. Navigate to the project directory which is the my-pantry folder if you're not already in it
+
+   ```bash
+   cd Project
+   cd my-pantry
+   ```
+
+3. Install dependencies
+
+   ```bash
+   npm install
+   ```
 
 ## API used
 1. Firebase Authentication API
