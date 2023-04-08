@@ -8,11 +8,7 @@ import { AuthContext } from "./context/AuthContext";
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import MyPantry from './pages/mypantry/mypantry';
-import ShowIngredients from './pages/mypantry/Ingredients';
-import NearbyStore from './pages/nearbystore/NearbyStore';
-import ForgotPassword from './pages/forgotpassword/ForgotPassword';
-import SavedRecipes from './pages/savedRecipe/SavedRecipes';
+import Mypantry from './pages/mypantry/Mypantry';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
@@ -22,18 +18,8 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path:"/ingredients",
-      element:(
-      <ShowIngredients/>
-      )
-    },
-    {
       path: "/login",
       element: <Login />,
-    },
-    {
-      path: "/forgotpassword",
-      element: <ForgotPassword />,
     },
     {
       path: "/register",
@@ -44,14 +30,6 @@ function App() {
       element: (
           <AuthRoute>
           <Profile />
-          </AuthRoute>
-      ),
-    },
-    {
-      path: "/savedrecipes", //to profile
-      element: (
-          <AuthRoute>
-          <SavedRecipes />
           </AuthRoute>
       ),
     },
@@ -68,6 +46,14 @@ function App() {
       element: (
         <AuthRoute>
         <NearbyStore />,
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/savedrecipes",
+      element: (
+        <AuthRoute>
+        <SavedRecipes />,
         </AuthRoute>
       ),
     },
