@@ -8,7 +8,9 @@ import { AuthContext } from "./context/AuthContext";
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import Mypantry from './pages/mypantry/Mypantry';
+import NearbyStore from './pages/nearbystore/NearbyStore';
+import SavedRecipes from './pages/savedRecipe/SavedRecipes';
+import MyPantry from './pages/mypantry/mypantry';
 
 function App() {
   const {currentUser}= useContext(AuthContext);
